@@ -1,0 +1,16 @@
+export(estimateGraph,
+estimateGraphFix,
+estimateGraphSob,
+estimateGraphRBD,
+MLoptimConstrained,
+plotDeltaSteps,
+plotGraph,
+plotGraphChange,
+plotiGraph,
+plotManipulate,
+plotTk,
+threshold,
+yhat)
+
+## (internal comment:)
+## not exported: modify.graph
