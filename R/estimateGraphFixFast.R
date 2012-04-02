@@ -1,4 +1,4 @@
-estimateGraphFix <- function(f.mat, d, q, q.arg, nMC, nfast99, ...) {
+estimateGraphFixFast <- function(f.mat, d, q, q.arg, nMC, nfast99, ...) {
     # FAST frequencies
     w <- c(11, 35)
     if (nfast99 < 2 * 6 * max(w)) 
@@ -35,16 +35,16 @@ estimateGraphFix <- function(f.mat, d, q, q.arg, nMC, nfast99, ...) {
     cossop <- cos(sop)
     harm1 <- 1:6 * w[1]
     harm2 <- 1:6 * w[2]
-    X01 <- matrix(, nr = nfast99, nc = 2)
+    X01 <- matrix(, nrow = nfast99, ncol = 2)
     for (i in 1:2)
       X01[, i] <- 1/2 + 1/pi * asin(sin(w[i] * s))
-    X <- matrix(, nr = nfast99, nc = 2)
+    X <- matrix(, nrow = nfast99, ncol = 2)
     for (j in 1:nrow(JK)) {
         for (i in 1:2) {
            X[, i] <- do.call(q[JK[j,i]], c(list(p = X01[, i]), q.arg[[JK[j,i]]]))
         }
       Dint <- numeric(nMC)
-        print(c("jk = ", JK[j, ]))
+        print(paste("index = ", paste(JK[j, ], collapse="")))
         for (m in (1:nMC)) {
             Dint[m] <- fast(fjk.mat, jk = JK[j, ], xfixed = SampleFixed[m, ], ...)
         }

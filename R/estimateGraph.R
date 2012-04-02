@@ -1,6 +1,6 @@
 estimateGraph <- function(f.mat, d, q = NULL, q.arg = NULL, 
-    N = NULL, method = "fixed", nMC = NULL, nfast99 = 500, L = NULL, 
-    M = 6, Nsobol = NULL, ...) {
+    N = NULL, method = "FixLO", nLO = NULL, nMC = NULL, 
+    nfast99 = 500, L = NULL, M = 6, Nsobol = NULL, ...) {
     p <- choose(d, 2)
     
     if (is.null(q)) {
@@ -14,8 +14,8 @@ estimateGraph <- function(f.mat, d, q = NULL, q.arg = NULL,
         q.arg <- rep(list(q.arg), d)
     }
     
-    if (!(method %in% c("fixed", "RBD", "Sobol"))) 
-        stop("method must be set to 'fixed', 'RBD' or 'Sobol'")
+    if (!(method %in% c("FixLO", "FixFast", "RBD", "Sobol"))) 
+        stop("method must be set to 'FixLO', 'FixFast' ,'RBD' or 'Sobol'")
     
     if (method == "RBD") {
         if (!is.null(L) & !is.null(N)) {
@@ -41,7 +41,19 @@ estimateGraph <- function(f.mat, d, q = NULL, q.arg = NULL,
         return <- estimateGraphSob(f.mat, d, q, q.arg, Nsobol, ...)
     }
     
-    if (method == "fixed") {
+    if (method == "FixLO") {
+      if (!is.null(nLO) & !is.null(N)) {
+        warning("nLO will be omitted since N is specified")
+        nLO <- round(N/(4*p), 0)
+      }
+      if (is.null(nLO) & !is.null(N)) 
+        nLO <- round(N/(4*p), 0)
+      if (is.null(Nsobol) & is.null(N)) 
+        stop("either N or nLO must be specified")
+      return <- estimateGraphFixLO(f.mat, d, q, q.arg, nLO, ...)
+    }
+        
+    if (method == "FixFast") {
         if (!is.null(nMC) & !is.null(N)) {
             warning("nMC will be omitted since N is specified")
             nMC <- round(N/(p * nfast99), 0)
@@ -50,7 +62,7 @@ estimateGraph <- function(f.mat, d, q = NULL, q.arg = NULL,
             nMC <- round(N/(p * nfast99), 0)
         if (is.null(nMC) & is.null(N)) 
             stop("either N or nMC must be specified")
-        return <- estimateGraphFix(f.mat, d, q, q.arg, nMC, nfast99, 
+        return <- estimateGraphFixFast(f.mat, d, q, q.arg, nMC, nfast99, 
             ...)
     }
     

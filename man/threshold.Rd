@@ -35,6 +35,6 @@ T. Muehlenstaedt, O. Roustant, J. Fruth
 f <- function(x) x[,1]*x[,3]*x[,4]
 soverall <- fast99(model = f, factors = 4, 
    n = 1000, q = "qunif", q.arg = list(min = 0, max = 1))
-totalInt <- estimateGraph(f=f, d=4, nMC=20, nfast99=500)
+totalInt <- estimateGraph(f=f, d=4, N=10000)
 threshold(0.01, totalInt=totalInt, d=4, dall=mean(soverall$V))
 }

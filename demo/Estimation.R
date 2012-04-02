@@ -27,32 +27,37 @@ N.eval <- 20000
 Int1 <- matrix(, N.run, choose(d, 2))
 Int2 <- matrix(, N.run, choose(d, 2))
 Int3 <- matrix(, N.run, choose(d, 2))
+Int4 <- matrix(, N.run, choose(d, 2))
 
 for (i in 1:N.run) {
     print(paste("i=", i))
-    Int1[i, ] <- estimateGraph(fun, d = d, N = N.eval, method = "fixed", 
+    Int1[i, ] <- estimateGraph(fun, d = d, N = N.eval, method = "FixLO", 
         q.arg = list(min = domain[1], max = domain[2]))[3, ]
-    Int2[i, ] <- estimateGraph(fun, d = d, N = N.eval, method = "RBD", 
+    Int2[i, ] <- estimateGraph(fun, d = d, N = N.eval, method = "FixFast", 
         q.arg = list(min = domain[1], max = domain[2]))[3, ]
-    Int3[i, ] <- estimateGraph(fun, d = d, N = N.eval, method = "Sobol", 
+    Int3[i, ] <- estimateGraph(fun, d = d, N = N.eval, method = "RBD", 
+        q.arg = list(min = domain[1], max = domain[2]))[3, ]
+    Int4[i, ] <- estimateGraph(fun, d = d, N = N.eval, method = "Sobol", 
         q.arg = list(min = domain[1], max = domain[2]))[3, ]
 }
 
 ### boxplots
 
-plot(0, type = "n", ylim = c(min(Int1, Int2, Int3) * 1.1, 
-    max(Int1, Int2, Int3) * 1.1), xlim = c(1, choose(d, 2)), xaxt = "n", 
+plot(0, type = "n", ylim = c(min(Int1, Int2, Int3, Int4) * 1.1, 
+    max(Int1, Int2, Int3, Int4) * 1.1), xlim = c(1, choose(d, 2)), xaxt = "n", 
     xlab = "interaction", ylab = "total interaction index estimation")
-boxplot(Int1, add = TRUE, at = 1:choose(d, 2) - 0.1, boxwex = 0.17, 
-    xaxt = "n", pch = 3, cex = 0.5)
-boxplot(Int2, add = TRUE, at = 1:choose(d, 2) + 0.1, col = "cyan1", 
-    boxwex = 0.17, xaxt = "n", pch = 3, cex = 0.5)
-boxplot(Int3, add = TRUE, at = 1:choose(d, 2) + 0.3, col = "red", 
-    boxwex = 0.17, xaxt = "n", pch = 3, cex = 0.5)
-points(1:choose(d, 2) - 0.4, true, cex = 1, pch = 4)
+boxplot(Int1, add = TRUE, at = 1:choose(d, 2) - 0.3, 
+    boxwex = 0.1, xaxt = "n", pch = 3, cex = 0.5)
+boxplot(Int2, add = TRUE, at = 1:choose(d, 2) - 0.1, col = 2, 
+    boxwex = 0.1, xaxt = "n", pch = 3, cex = 0.5)
+boxplot(Int3, add = TRUE, at = 1:choose(d, 2) + 0.1, col = 3, 
+    boxwex = 0.1, xaxt = "n", pch = 3, cex = 0.5)
+boxplot(Int4, add = TRUE, at = 1:choose(d, 2) + 0.3, col = 4, 
+    boxwex = 0.1, xaxt = "n", pch = 3, cex = 0.5)
+points(1:choose(d, 2), true, cex = 1, pch = 4, col=1)
 abline(h = 0, v = 1:(choose(d, 2) - 1) + 0.5, lty = 3)
 axis(1, at = 1:choose(d, 2), labels = paste(combn(d, 2)[1, 
     ], combn(d, 2)[2, ], sep = ""))
-legend("topright", legend = c("fixing method", "RBD-FAST", 
-    "Sobol method", "true value"), pch = c(22, 22, 22, 4), col = 1, cex = 1, 
-    pt.bg = c(0, "cyan1", 2)) 
+legend("topright", legend = c("FixLO", "FixFast", "RBD",
+    "Sobol", "true value"), pch = c(22, 22, 22, 22, 4), col = 1, cex = 0.6, 
+    pt.bg = c(0, 2,3,4)) 

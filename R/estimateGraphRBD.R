@@ -19,7 +19,7 @@ estimateGraphRBD <- function(f.mat, d, q, q.arg, L, M, ...) {
         DTi <- numeric(ncol(JK))
         for (i in 1:ncol(JK)) {
             # for all factor combinations
-            print(JK[, i])
+          print(paste("index = ", paste(JK[,i], collapse="")))
             Xs <- X
             o <- sample(1:N)  # X sampled at i
             Xs[, JK[, i]] <- Xs[o, JK[, i]]

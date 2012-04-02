@@ -1,5 +1,6 @@
 export(estimateGraph,
-estimateGraphFix,
+estimateGraphFixLO,
+estimateGraphFixFast,
 estimateGraphSob,
 estimateGraphRBD,
 MLoptimConstrained,
@@ -9,8 +10,9 @@ plotGraphChange,
 plotiGraph,
 plotManipulate,
 plotTk,
+simAdd,
 threshold,
 yhat)
 
 ## (internal comment:)
-## not exported: modify.graph
+## not exported: modify.graph, LogLConstrained, Rfunc, rfunc, paramVect2List, paramList2Vect

@@ -28,7 +28,7 @@ plotDeltaSteps <- function(totalInt, d, dall, interval = c(0,
     deltaCut <- c(delta[-length(delta)], 4/3 * delta[length(delta) - 
         1])
     plot(1:length(delta), deltaCut, type = "s", ylab = "delta", xaxt = "n")
-    axis(1, at = 1:length(delta), label = round(delta, 4), las = 2, 
+    axis(1, at = 1:length(delta), labels = round(delta, 4), las = 2, 
         outer = TRUE)
     title(xlab = "delta steps", outer = TRUE, mgp = c(4, 1, 0))
     title("Delta Step Plot", outer = TRUE)

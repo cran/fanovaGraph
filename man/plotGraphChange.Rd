@@ -36,13 +36,13 @@ plotManipulate(totalInt, d, dall, delta.layout=0.01)
 ### example direct for ishigami instead of metamodel
 soverall1 <- fast99(model = ishigami.fun, factors = 3, 
    n = 2000, q = "qunif", q.arg = list(min = -pi, max = pi))
-totalInt1 <- estimateGraph(f.mat=ishigami.fun, d=3, nMC=20, nfast99=500, 
-q = "qunif", q.arg = list(min = -pi, max = pi), method="fixed")
+totalInt1 <- estimateGraph(f.mat=ishigami.fun, d=3, N=10000, 
+q = "qunif", q.arg = list(min = -pi, max = pi), method="FixLO")
 
-#plotGraphChange(totalInt=totalInt1, d=3, dall=mean(soverall1$V), fix.layout=TRUE, delta.layout=0.1)
+#plotGraphChange(totalInt=totalInt1, d=3, dall=mean(soverall1$V), #fix.layout=TRUE, delta.layout=0.1)
 
 #library(tcltk)
 #plotTk(totalInt=totalInt1, d=3, dall=mean(soverall1$V), delta.layout=0.1)
 
-#plotManipulate(totalInt=totalInt1, d=3, dall=mean(soverall1$V), delta.layout=0.1)
+#plotManipulate(totalInt=totalInt1, d=3, dall=mean(soverall1$V), #delta.layout=0.1)
 }

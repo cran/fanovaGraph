@@ -13,27 +13,32 @@ Important functions:
          \code{threshold} \tab Takes the total interaction indices and creates the graph structure, including a threshold cut for indices lower than a given value \cr
          \code{plotiGraph} \tab Plots a given graph structure \cr
          \code{plotDeltaSteps} \tab Provides plots for the choice of the threshold \cr
-         \code{MLoptimConstrained} \tab Kriging model estimation with the kernel modified by the graph \cr
-         \code{yhat} \tab Prediction function for the modified model
+         \code{MLoptimConstrained} \tab Kriging model estimation with block-additive kernel \cr
+         \code{yhat} \tab Prediction function from Kriging model with block-additive kernel \cr
+         \code{simAdd} \tab Simulation from Kriging model with block-additive kernel
        }
 }
 \author{
 J. Fruth, T. Muehlenstaedt, O. Roustant
 }
 \references{
-Muehlenstaedt, T.; Roustant, O.; Carraro, L.; Kuhnt, S. (2011) Data-driven Kriging models based on FANOVA-decomposition, \emph{Statistics and Computing}.
+Fruth, J.; Roustant, O.; Kuhnt, S. (2012+) Total interaction index: A variance-based sensitivity index for interaction screening.
 
-Fruth, J.; Roustant, O.; Kuhnt, S. (2011+) Total interaction indices for the decomposition of functions with high complexity.
+Janon, A.; Klein, T.; Lagnoux-Renaudie, A.; Nodet, M.; Prieur, C. (2012+) Asymptotic normality and efficiency of two Sobol index estimators.
 
-Sobol', I. M. (1993) Sensitivity estimates for nonlinear mathematical models, \emph{Mathematical Modeling and Computational Experiment}, \bold{1}, 407-414.
+Liu, R.; Owen, A.B. (2006) Estimating mean dimensionality of analysis of variance decompositions, \emph{Journal of the American Statistical Association}, \bold{101} 474, 712-721.
 
 Mara, T.A (2009) Extension of the RBD-FAST method to the computation of global sensitivity indices, \emph{Reliability Engineering & System Safety}, \bold{94} no. 8, 1274-1281.
+
+Muehlenstaedt, T.; Roustant, O.; Carraro, L.; Kuhnt, S. (2011) Data-driven Kriging models based on FANOVA-decomposition, \emph{Statistics and Computing}.
+
+Sobol', I. M. (1993) Sensitivity estimates for nonlinear mathematical models, \emph{Mathematical Modeling and Computational Experiment}, \bold{1}, 407-414.
 }
 \keyword{package}
 \seealso{
 \code{\link[DiceKriging:DiceKriging-package]{DiceKriging}}, 
 \code{\link[sensitivity:sensitivity-package]{sensitivity}},
-\code{\link[igraph:igraph-package]{igraph}}
+\code{\link[igraph0:igraph-package]{igraph0}}
 }
 \examples{
 #demo(ExampleIshigami)

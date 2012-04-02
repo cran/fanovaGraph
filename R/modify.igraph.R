@@ -93,13 +93,13 @@ modify.igraph <- function() {
         
     }
     
-    .igraph.shapes <- get(".igraph.shapes", asNamespace("igraph"))
+    .igraph.shapes <- get(".igraph.shapes", asNamespace("igraph0"))
     .igraph.shapes[["circle2"]] <- .igraph.shape.circle2
-    unlockBinding(".igraph.shapes", asNamespace("igraph"))
-    assign(".igraph.shapes", .igraph.shapes, envir = asNamespace("igraph"))
+    unlockBinding(sym=".igraph.shapes", env=asNamespace("igraph0"))
+    assign(".igraph.shapes", .igraph.shapes, envir = asNamespace("igraph0"))
     
-    i.default.values <- get("i.default.values", asNamespace("igraph"))
+    i.default.values <- get("i.default.values", asNamespace("igraph0"))
     i.default.values$vertex$frame.width = 1
-    unlockBinding("i.default.values", asNamespace("igraph"))
-    assign("i.default.values", i.default.values, envir = asNamespace("igraph"))
+    unlockBinding(sym="i.default.values", env=asNamespace("igraph0"))
+    assign("i.default.values", i.default.values, envir = asNamespace("igraph0"))
 } 
