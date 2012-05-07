@@ -6,7 +6,7 @@
 \description{Constrained MLE optimization for kernels defined by cliques using \code{\link{constrOptim}}
 }
 \usage{
-MLoptimConstrained(x, y, n.initialtries = 50, limits = c(0.001, 4), eps.R = 1e-08, Cl, covtype = "gauss", eps.Var = 1e-06, MAXIT = 1000, iso = FALSE)
+MLoptimConstrained(x, y, n.initialtries = 50, limits = NULL, eps.R = 1e-08, Cl, covtype = "gauss", eps.Var = 1e-06, MAXIT = 1000, iso = FALSE)
 }
 
 \arguments{
@@ -16,7 +16,7 @@ MLoptimConstrained(x, y, n.initialtries = 50, limits = c(0.001, 4), eps.R = 1e-0
 }
   \item{n.initialtries}{number of random initial parameters for optimization, defaults to 50
 }
-  \item{limits}{vector of length 2 indicating the constraining limits for theta parameters, defaults to \code{limits=c(0.001,4)}
+  \item{limits}{a list with items lower, upper containing boundaries for the covariance parameter vector theta, if \code{NULL} suitable bounds are computed from the range of \code{x}
 }
   \item{eps.R}{small positive number indicating the nugget effect added to the covariance matrix diagonalk, defaults to \code{eps.R = 1e-08}
 }

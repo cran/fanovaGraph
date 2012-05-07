@@ -44,7 +44,7 @@ estimateGraphFixFast <- function(f.mat, d, q, q.arg, nMC, nfast99, ...) {
            X[, i] <- do.call(q[JK[j,i]], c(list(p = X01[, i]), q.arg[[JK[j,i]]]))
         }
       Dint <- numeric(nMC)
-        print(paste("index = ", paste(JK[j, ], collapse="")))
+        message(paste("index = ", paste(JK[j, ], collapse="")))
         for (m in (1:nMC)) {
             Dint[m] <- fast(fjk.mat, jk = JK[j, ], xfixed = SampleFixed[m, ], ...)
         }

@@ -28,10 +28,9 @@ krigingMean <- function(Xnew) predict.km(object = KM, newdata = Xnew,
 
 ### standard Sobol indices with package 'sensitivity'
 
-i1 <- fast99(model = krigingMean, factors = d, n = 2000, q = "qunif", 
-    q.arg = list(min = domain[1], max = domain[2]))
+i1 <- fast99(model = krigingMean, factors = d, n = 3000, q = "qunif", 
+             q.arg = list(min = domain[1], max = domain[2]))
 plot(i1)
-
 
 ### estimation of total interaction indices via fixing method
 

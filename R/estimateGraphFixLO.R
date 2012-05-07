@@ -12,7 +12,7 @@ estimateGraphFixLO <- function(f.mat, d, q, q.arg, nLO,
     totalInt <- numeric(p)
     for (index in 1:p)
     {
-      print(paste("index = ", paste(ij.set[,index], collapse="")))
+      message(paste("index = ", paste(ij.set[,index], collapse="")))
       i <- ij.set[1,index]; j <- ij.set[2,index]
       X12 <- Z
       X12[,c(i,j)] <- X[,c(i,j)]

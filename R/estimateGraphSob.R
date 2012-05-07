@@ -11,7 +11,7 @@ estimateGraphSob <- function(f.mat, d, q, q.arg, Nsobol,
     DTi <- numeric(d)
     v.01 <- matrix(runif(Nsobol * 2), ncol = 2)
     for (i in 1:p) {
-        print(paste("index = ", paste(JK[,i], collapse="")))
+        message(paste("index = ", paste(JK[,i], collapse="")))
       
         y <- (1:d)[-JK[, i]]
         X2 <- matrix(, Nsobol, d)
@@ -25,7 +25,7 @@ estimateGraphSob <- function(f.mat, d, q, q.arg, Nsobol,
     }
     v.01 <- matrix(runif(Nsobol), ncol = 1)
     for (i in 1:d) {
-        print(paste("index = ", i))
+        message(paste("index = ", i))
         (y <- (1:d)[-i])
         X2 <- matrix(, Nsobol, d)
         X2[, y] <- X.01[, y]

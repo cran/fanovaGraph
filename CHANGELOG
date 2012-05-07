@@ -1,7 +1,14 @@
-CHANGELOG for fanovaGraph version 1.1
+CHANGELOG for fanovaGraph 
+
+version 1.2
+
+* The function MLoptimConstrained has been adapted to avoid rescaling between [-1,1]
+(the limits for the optimizer are computed from the data)
+* new function "totalIndex" for total Sobol indices of main effects
+
+version 1.1
 
 * new function "simAdd" to simulate from additive kernels
 * new method for total interaction estimation "FixLO"
 * bug fixed for isotropic and single cliques
 * for kriging prediction "yhat": changed input order, faster computation, prediction variance
-

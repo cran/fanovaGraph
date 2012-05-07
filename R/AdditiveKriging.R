@@ -130,7 +130,7 @@ rfunc <- function(newdata, x, theta, alpha, covtype, n.Cl, Cl, iso) {
 ### estimation of kriging parameters with block additive kernel
 
 MLoptimConstrained <- function(x, y, n.initialtries = 50, 
-    limits = c(0.001, 4), eps.R = 1e-08, Cl, covtype = "gauss", eps.Var = 1e-06, 
+    limits = NULL, eps.R = 1e-08, Cl, covtype = "gauss", eps.Var = 1e-06, 
     MAXIT = 1000, iso = FALSE) {
     ### based on  LogLCl4
     n.Cl <- length(Cl)
@@ -145,13 +145,23 @@ MLoptimConstrained <- function(x, y, n.initialtries = 50,
     } else {
         n.Cl.ani <- n.Cl - sum(iso)
         n.Cl.iso <- sum(iso)
-        
         d <- ncol(x)
         n <- length(y)
         theta.n <- sum(as.numeric(lapply(Cl[which(iso == FALSE)], length)))
         theta.n <- theta.n + sum(iso)
+        if (is.null(limits))#get limits for theta
+        {
+          lower <- rep(1e-10, theta.n)
+          upper <- numeric()
+          for (i in 1:n.Cl)
+          {
+            if (iso[i]==FALSE)
+            upper <- c(upper, 2 * diff(apply(x[, Cl[[i]],drop=FALSE], 2, range)))
+            else upper <- c(upper, max(2*diff(apply(x[, Cl[[i]],drop=FALSE], 2, range))))
+          }
+          limits <- data.frame(lower=lower,upper=upper)
+        }
         DM <- matrix(1, ncol = 1, nrow = n)
-        
         Ui <- c(rep(-1, n.Cl - 1), rep(0, theta.n))
         Ui <- rbind(Ui, cbind(diag(rep(1, n.Cl - 1)), matrix(0, ncol = theta.n, 
             nrow = n.Cl - 1)))
@@ -159,15 +169,14 @@ MLoptimConstrained <- function(x, y, n.initialtries = 50,
             diag(rep(1, theta.n))))
         Ui <- rbind(Ui, cbind(matrix(0, ncol = n.Cl - 1, nrow = theta.n), 
             diag(rep(-1, theta.n))))
-        Ci <- c(-(1 - eps.Var), rep(eps.Var, n.Cl - 1), rep(limits[1], 
-            theta.n), rep(-limits[2], theta.n))
+        Ci <- c(-(1 - eps.Var), rep(eps.Var, n.Cl - 1), limits$lower, -limits$upper)
         ## choosing initial points
         alphastart <- matrix(runif(n.initialtries * n.Cl), ncol = n.Cl)
         alphastart <- (alphastart/apply(alphastart, 1, sum))[, -n.Cl]
-        thetastart <- matrix(runif(n.initialtries * theta.n, limits[1], 
-            limits[2]), nrow = n.initialtries)  #  choosing a random start vector
+        thetastart01 <- matrix(runif(n.initialtries * theta.n), nrow = n.initialtries) #  choosing a random start vector
+        thetastart <- t(apply(thetastart01,1, function(a) a*(limits$upper-limits$lower)+limits$lower))
         parameterstart <- cbind(alphastart, thetastart)
-        
+    
         LLinitial <- apply(parameterstart, 1, LogLConstrained, y = y, 
             x = x, DM = DM, n = n, covtype = covtype, eps.R = eps.R, n.Cl = n.Cl, 
             Cl = Cl, iso = iso)

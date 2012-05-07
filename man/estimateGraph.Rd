@@ -7,8 +7,7 @@
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{Estimation of the total interaction indices
 }
-\description{Estimation of the total interaction indices, a particular case 
-of superset importance, introduced by Liu and Owen (2006) of a function to estimate the FANOVA graph edges.
+\description{Estimation of the total interaction indices, a particular case of superset importance, introduced by Liu and Owen (2006) of a function to estimate the FANOVA graph edges.
 }
 \usage{
 estimateGraph(f.mat, d, q, q.arg, N, method = "FixLO", nLO, nMC, nfast99 = 500, L, M = 6, Nsobol, ...)
@@ -32,7 +31,7 @@ estimateGraph(f.mat, d, q, q.arg, N, method = "FixLO", nLO, nMC, nfast99 = 500, 
   \item{Nsobol}{optional integer, only if \code{method="Sobol"}, number of Monte Carlo simulations in Sobol method}
   \item{...}{additional arguments to be passed to the function \code{f.mat}}
 }
-\value{a matrix containing the unnormalized total interaction indices}
+\value{a matrix containing the index numbers \code{i} and {j} in the first two rows the unscaled total interaction indices in the third row}
 
 \author{
 J. Fruth, T. Muehlenstaedt

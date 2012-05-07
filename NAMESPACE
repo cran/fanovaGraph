@@ -12,6 +12,7 @@ plotManipulate,
 plotTk,
 simAdd,
 threshold,
+totalIndex,
 yhat)
 
 ## (internal comment:)

@@ -1,8 +1,8 @@
 Package: fanovaGraph
 Type: Package
 Title: Building Kriging models from FANOVA graphs
-Version: 1.1
-Date: 2012-04-02
+Version: 1.2
+Date: 2012-05-07
 Author: Jana Fruth, Thomas Muehlenstaedt, Olivier Roustant
 Maintainer: <fruth@statistik.tu-dortmund.de>
 Description: Estimation and plotting of a function's FANOVA graph to
@@ -13,6 +13,6 @@ License: GPL-3
 LazyLoad: yes
 Depends: sensitivity, igraph0, DiceKriging (>= 1.2)
 Suggests: tcltk, manipulate
-Packaged: 2012-04-11 09:37:56 UTC; fruth
+Packaged: 2012-05-14 14:45:26 UTC; fruth
 Repository: CRAN
-Date/Publication: 2012-04-11 13:28:47
+Date/Publication: 2012-05-14 16:10:54
