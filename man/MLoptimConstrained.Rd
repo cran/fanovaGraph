@@ -29,7 +29,7 @@ MLoptimConstrained(x, y, n.initialtries = 50, limits = NULL, eps.R = 1e-08, Cl, 
 }
   \item{MAXIT}{maximum number of iterations for optimization, defaults to \code{MAXIT=1000}
 }
-  \item{iso}{boolean vector indicating for each clique if it is isotropic (TRUE) or anisotropic (FALSE) with isotropic cliques at the end, defaults to \code{iso = FALSE} (all cliques anisotropic)
+  \item{iso}{boolean vector indicating for each clique if it is isotropic (TRUE) or anisotropic (FALSE), defaults to \code{iso = FALSE} (all cliques anisotropic)
 }
 }
 \value{

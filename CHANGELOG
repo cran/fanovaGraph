@@ -1,5 +1,10 @@
 CHANGELOG for fanovaGraph 
 
+version 1.3
+* new parameters maximal edge thickness and circle diameter in function "plotiGraph"
+* adaptions according to update to DiceKriging 1.3.3
+* additional confidence intervals for "estimateGraph", method "FixLO"
+
 version 1.2
 
 * The function MLoptimConstrained has been adapted to avoid rescaling between [-1,1]

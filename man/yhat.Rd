@@ -26,7 +26,7 @@ yhat(newdata, x, y, parameter, covtype = "gauss", eps.R = 1e-08,
 }
   \item{Cl}{list of cliques
 }
-  \item{iso}{boolean vector indicating for each clique if it is isotropic (TRUE) or anisotropic (FALSE) with isotropic cliques at the end, defaults to \code{iso = FALSE} (all cliques anisotropic)
+  \item{iso}{boolean vector indicating for each clique if it is isotropic (TRUE) or anisotropic (FALSE), defaults to \code{iso = FALSE} (all cliques anisotropic)
 }
   \item{se.compute}{optional boolean. If FALSE, only the kriging mean is computed. If TRUE, the kriging variance (actually, the corresponding standard deviation) is computed, too}
 }

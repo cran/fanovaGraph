@@ -35,5 +35,8 @@ estimateGraphRBD <- function(f.mat, d, q, q.arg, L, M, ...) {
     totalInt <- STij  # just initializing
     for (i in 1:ncol(totalInt)) totalInt[3, i] <- sum(STi[2, totalInt[1:2, 
         i]]) - STij[3, i]
-    totalInt
+    inter <- paste("X",totalInt[1,],"*","X",totalInt[2,], sep="")
+    totalInt <- as.matrix(round(totalInt[3,],4))
+    rownames(totalInt) <- inter
+    return(totalInt)
 } 

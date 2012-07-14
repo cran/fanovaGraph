@@ -21,38 +21,42 @@ x <- L01 * (domain[2] - domain[1]) + domain[1]
 y <- fun(x)
 KM <- km(~1, design = data.frame(x), response = y)
 
-### prediction function (the new metamodel!)
-
-krigingMean <- function(Xnew) predict.km(object = KM, newdata = Xnew, 
-    type = "UK", se.compute = FALSE)$mean
-
 ### standard Sobol indices with package 'sensitivity'
 
-i1 <- fast99(model = krigingMean, factors = d, n = 3000, q = "qunif", 
-             q.arg = list(min = domain[1], max = domain[2]))
+i1 <- fast99(model = kmPredictWrapper, factors = d, n = 2000, q = "qunif", 
+             q.arg = list(min = domain[1], max = domain[2]), km.object = KM)
 plot(i1)
+
 
 ### estimation of total interaction indices via fixing method
 
-totalInt <- estimateGraph(f.mat = krigingMean, d = d, N = 30000, q.arg = 
-  list(min = domain[1], max = domain[2]), method = "FixLO") 
+g <- estimateGraph(f.mat = kmPredictWrapper, d = d, N = 30000, q.arg = 
+  list(min = domain[1], max = domain[2]), km.object = KM) 
+print(g$tii)
 
-### plotting the thresholded graph without and with weights
+### plot the full graph
 
-graph <- threshold(delta = 0.1, totalInt = totalInt, d = d, dall = mean(i1$V))
-plotiGraph(graph$E, d)
-plotiGraph(E = graph$E, d = d, i1 = i1$D1/mean(i1$V), tii = graph$tii.scaled)
+plotiGraph(g)
+
+### threshold decision by looking at DeltaJumps
+
+plotDeltaJumps(g)
+
+### threshold inactive edges and plot graph again
+
+g.cut <- threshold(g, delta = 0.1, scale = TRUE)
+plotiGraph(g.cut)
 
 ### estimate new model
 
-Cliques <- graph[[1]]
+Cliques <- g.cut$cliques
 parameter <- MLoptimConstrained(x, y, Cl = Cliques)
 
 ### comparison to standard kriging
 
 xpred <- matrix(runif(d * 1000, domain[1], domain[2]), ncol = d)
 y_new <- yhat(xpred, x, y, parameter, Cl = Cliques)
-y_old <- krigingMean(xpred)
+y_old <- kmPredictWrapper(xpred, km.object = KM)
 y_exact <- fun(xpred)
 
 op <- par("mfrow")

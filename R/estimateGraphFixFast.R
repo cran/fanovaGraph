@@ -50,5 +50,8 @@ estimateGraphFixFast <- function(f.mat, d, q, q.arg, nMC, nfast99, ...) {
         }
         DintJK[j] <- mean(Dint)
     }
-    return(rbind(j = JK[, 1], k = JK[, 2], DTjk = DintJK))
+    inter <- paste("X",JK[,1],"*","X",JK[,2], sep="")
+    totalInt <- as.matrix(round(DintJK,4))
+    rownames(totalInt) <- inter
+    return(totalInt)
 } 

@@ -1,33 +1,31 @@
-plotGraphChange <- function(totalInt, d, dall, fix.layout = TRUE, 
-    delta.layout = 0.01) {
+plotGraphChange <- function(graphlist, fix.layout = TRUE, delta.layout = 0.01) {
+    d <- graphlist$d
+    dall <- graphlist$V
     oldPar <- par(c("usr", "xpd"))
     par(usr = c(-1.161, 1.161, -1.17826, 1.17826), xpd = TRUE)
-    graph0 <- threshold(delta = 0, totalInt = totalInt, d = d, dall = dall)
-    delta <- c(0, sort(graph0$tii.scaled), 1)
+    delta <- c(0, sort(graphlist$tii/dall), 1)
     delta.max <- delta[length(delta) - 1]
     n.CL <- c()
     
     # position of the vertices (defined by igraphs at the graph on
     #   delta.layout)
-    E.layout <- threshold(delta = delta.layout, totalInt = totalInt, 
-        d = d, dall = dall)$E
+    tii.layout <- threshold(graphlist, delta = delta.layout, scaled = TRUE)$tii[,1]
+    E.layout <- t(combn(d,2)[,tii.layout>0])
     g.layout <- graph(as.vector(t(E.layout)) - 1, n = d, directed = FALSE)
     layout <- layout.fruchterman.reingold(g.layout)
     
     devAskNewPage(ask = TRUE)
     for (i in 1:(length(delta) - 1)) {
-        graph <- threshold(delta[i], totalInt, d, dall)
+        graph <- threshold(graphlist, delta = delta[i], scaled = TRUE)
         if (fix.layout == TRUE) {
-            plotiGraph(graph$E, d, tii = graph$tii.scaled, layout = layout)
+            plotiGraph(graph, layout = layout)
         } else {
-            plotiGraph(graph$E, d = d, tii = graph$tii.scaled)
+            plotiGraph(graph)
         }
-        E.graph <- graph(as.vector(t(graph$E)), n = d + 1, directed = FALSE)
-        CL <- maximal.cliques(E.graph)[-1]
-        n.CL[i] <- length(CL)
+        n.CL[i] <- length(graph$cliques)
         text(0, -2, paste("delta = [", round(delta[i], 4), ",", round(delta[i + 
             1], 4), ")"))
-        title(main = paste("number of cliques =", length(CL)))
+        title(main = paste("number of cliques =", n.CL[i]))
         rect(delta[i] * 2/delta.max - 1, -1.55, delta[i + 1] * 2/delta.max - 
             1, -1.45, density = NA, col = "blue")
         lines(c(-1, 1.1), c(-1.5, -1.5))

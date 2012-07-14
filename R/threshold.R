@@ -1,10 +1,21 @@
-threshold <- function(delta, totalInt, d, dall) {
-    ## second part of the graph estimation procedure
-    ## former EstG2c
-    col.index <- which(totalInt[3, ]/dall > delta)
-    E <- t(totalInt[-3, col.index])  ##  cut in delta
-    tii.scaled <- totalInt[3, col.index]/dall
-    E.graph <- graph(as.vector(t(E)), n = d + 1, directed = FALSE)
-    CL <- maximal.cliques(E.graph)[-1]
-    return(list(CL = CL, E = E, tii.scaled = tii.scaled))
+threshold <- function(graphlist, delta, scaled = TRUE, robust = FALSE) {
+  d <- graphlist$d
+  if (robust & ncol(graphlist$tii)!=4){
+    warning("confidence intervals missing in argument 'graphlist', robust = TRUE ignored")
+    robust <- FALSE
+  }
+  if (robust){
+    valuesToCut <- graphlist$tii[,4]
+  } else{
+    valuesToCut <- graphlist$tii[,1]
+  }
+  if (scaled){
+    valuesToCut <- valuesToCut/graphlist$V
+  } 
+  graphlistNew <- graphlist
+  graphlistNew$tii[which(valuesToCut <= delta),] <- 0
+  # estimate cliques
+    E <- t(combn(d,2)[,graphlistNew$tii[,1] > 0])
+    graphlistNew$cliques <- maximal.cliques(graph(as.vector(t(E)), d + 1, FALSE))[-1]
+  return(graphlistNew)
 } 

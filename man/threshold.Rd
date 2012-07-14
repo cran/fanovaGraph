@@ -1,40 +1,50 @@
 \name{threshold}
 \alias{threshold}
 
-\title{Treshold Step of Graph Creation
+\title{Threshold indices
 }
-\description{Takes total interaction indices, Sobol indices and delta and creates graph with cliques by thresholding on delta.
+\description{All indices below a treshold are set to be zero.
 }
 \usage{
-threshold(delta, totalInt, d, dall)
+threshold(graphlist, delta, scaled = TRUE, robust = FALSE)
 }
 
 \arguments{
-  \item{delta}{numeric threshold between 0 and 1, edges with index > delta are kept in the graph
+  \item{graphlist}{a list representing the graph structure as obtained from \code{\link{estimateGraph}}
 }
-  \item{totalInt}{a matrix of three rows as output of \code{\link{estimateGraph}}, the third  row contains the unnormalized total interactions, the first two rows indicate the corresponding vertices
+  \item{delta}{numeric threshold, between 0 and 1 if \code{scaled = TRUE}
 }
-  \item{d}{integer, number of input factors (vertices)
+  \item{scaled}{optional boolean, if TRUE, indices are normalized by the overall variance before for threshold cut, defaults to TRUE
 }
-\item{dall}{value of the overall variance
+  \item{robust}{optional boolean, if TRUE, upper confidence intervals limits are used for the threshold cut instead of indices themselves, confidence intervals must be provided in \code{graphlist}, defaults to FALSE
 }
 }
 \value{
-list with components
-\item{CL}{list of cliques}
-\item{E}{matrix with two columns containing the edges of the graph}
-\item{tii.scaled}{vector containing the total indices of the edges of the graph scaled by the overall variance \code{dall}}
+ a list of a same structure as the input \code{graphlist} with thresholded indices and updated clique structure, see \code{\link{estimateGraph}} for a detailed description
 }
+
+\section{Warning}{
+The threshold cut is by default performed on scaled indices. For a cut on the original unscaled indices set \code{scaled = FALSE}.
+}
+
+
 \references{
 Muehlenstaedt, T.; Roustant, O.; Carraro, L.; Kuhnt, S. (2011) Data-driven Kriging models based on FANOVA-decomposition, \emph{Statistics and Computing}.
 }
 \author{
-T. Muehlenstaedt, O. Roustant, J. Fruth
+J. Fruth, T. Muehlenstaedt, O. Roustant
 }
 \examples{
-f <- function(x) x[,1]*x[,3]*x[,4]
-soverall <- fast99(model = f, factors = 4, 
-   n = 1000, q = "qunif", q.arg = list(min = 0, max = 1))
-totalInt <- estimateGraph(f=f, d=4, N=10000)
-threshold(0.01, totalInt=totalInt, d=4, dall=mean(soverall$V))
+# Kriging model prediction
+x <- matrix(runif(100*3,-pi,pi),100,3)
+KM <- km(~1, design = data.frame(x), response = ishigami.fun(x))
+krigingMean <- function(Xnew) predict(object = KM, newdata = Xnew, 
+    type = "UK", se.compute = FALSE, checkNames = FALSE)$mean
+    
+# full graph estimation
+g <- estimateGraph(krigingMean, d=3, N=10000, q.arg=list(min=-pi, max=pi))
+print(g[c(2,6)])
+# threshold graph
+g.cut <- threshold(g, delta = 0.1)
+print(g.cut[c(2,6)])
 }

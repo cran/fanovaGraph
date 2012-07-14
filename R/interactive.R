@@ -1,18 +1,20 @@
-plotTk <- function(totalInt, d, dall, delta.layout = 0.01) {
+plotTk <- function(graphlist, delta.layout = 0.01) {
     require(tcltk)
-    E.layout <- threshold(delta.layout, totalInt, d, dall)$E
+    d <- graphlist$d
+    dall <- graphlist$V
+    totalInt <- graphlist$tii[,1]
+    tii.layout <- threshold(graphlist, delta = delta.layout, scaled = TRUE)$tii[,1]
+    E.layout <- t(combn(d,2)[,tii.layout>0])
     g.layout <- graph(as.vector(t(E.layout)) - 1, n = d, directed = FALSE)
     layout <- layout.fruchterman.reingold(g.layout)
-    max.delta <- max(totalInt[3, ]/dall + 0.001)
+    max.delta <- max(totalInt/dall + 0.001)
     
     plotting <- function(delta) {
-        graph <- threshold(delta, totalInt, d, dall)
-        plotiGraph(graph$E, d, tii = graph$tii.scaled, layout = layout)
-        E.graph <- graph(as.vector(t(graph$E)), n = d + 1, directed = FALSE)
-        CL <- maximal.cliques(E.graph)[-1]
-        n.CL <- length(CL)
+        graph <- threshold(graphlist, delta=delta, scaled = TRUE)
+        plotiGraph(graph, layout = layout)
+        n.CL <- length(graph$cliques)
         title(main = paste("delta =", round(delta, 5)))
-        title(sub = paste("number of cliques =", length(CL)))
+        title(sub = paste("number of cliques =", n.CL))
     }
     
     variable <- tclVar(delta.layout)  # start value
@@ -31,21 +33,23 @@ plotTk <- function(totalInt, d, dall, delta.layout = 0.01) {
 }
 
 
-plotManipulate <- function(totalInt, d, dall, delta.layout = 0.01) {
+plotManipulate <- function(graphlist, delta.layout = 0.01) {
     require(manipulate)
-    E.layout <- threshold(delta.layout, totalInt, d = d, dall = dall)$E
+    d <- graphlist$d
+    dall <- graphlist$V
+    totalInt <- graphlist$tii[,1]
+    tii.layout <- threshold(graphlist, delta = delta.layout, scaled = TRUE)$tii[,1]
+    E.layout <- t(combn(d,2)[,tii.layout>0])
     g.layout <- graph(as.vector(t(E.layout)) - 1, n = d, directed = FALSE)
     layout <- layout.fruchterman.reingold(g.layout)
-    max.delta <- max(totalInt[3, ]/dall + 0.001)
+    max.delta <- max(totalInt/dall + 0.001)
     
     plotting <- function(delta) {
-        graph <- threshold(delta, totalInt, d, dall)
-        plotiGraph(graph$E, d, tii = graph$tii.scaled, layout = layout)
-        E.graph <- graph(as.vector(t(graph$E)), n = d + 1, directed = FALSE)
-        CL <- maximal.cliques(E.graph)[-1]
-        n.CL <- length(CL)
+        graph <- threshold(graphlist, delta=delta, scaled = TRUE)
+        plotiGraph(graph, layout = layout)
+        n.CL <- length(graph$cliques)
         title(main = paste("delta =", round(delta, 5)))
-        title(sub = paste("number of cliques =", length(CL)))
+        title(sub = paste("number of cliques =", n.CL))
     }
     manipulate(plotting(delta), delta = slider(0, max.delta, initial = delta.layout, 
         step = 5e-04))

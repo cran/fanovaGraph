@@ -1,7 +1,7 @@
 estimateGraph <- function(f.mat, d, q = NULL, q.arg = NULL, 
     N = NULL, method = "FixLO", nLO = NULL, nMC = NULL, 
-    nfast99 = 500, L = NULL, M = 6, Nsobol = NULL, ...) {
-    p <- choose(d, 2)
+    nfast99 = 500, L = NULL, M = 6, Nsobol = NULL, confInt = TRUE, ...) {
+p <- choose(d, 2)
     
     if (is.null(q)) {
         q <- rep("qunif", d)
@@ -16,7 +16,7 @@ estimateGraph <- function(f.mat, d, q = NULL, q.arg = NULL,
     
     if (!(method %in% c("FixLO", "FixFast", "RBD", "Sobol"))) 
         stop("method must be set to 'FixLO', 'FixFast' ,'RBD' or 'Sobol'")
-    
+
     if (method == "RBD") {
         if (!is.null(L) & !is.null(N)) {
             warning("L will be omitted since N is specified")
@@ -26,7 +26,7 @@ estimateGraph <- function(f.mat, d, q = NULL, q.arg = NULL,
             L <- round(N/(2 * (p + d)) - 6 * d, 0)
         if (is.null(L) & is.null(N)) 
             stop("either N or L must be specified")
-        return <- estimateGraphRBD(f.mat, d, q, q.arg, L, M, ...)
+        tii <- estimateGraphRBD(f.mat, d, q, q.arg, L, M, ...)
     }
     
     if (method == "Sobol") {
@@ -38,7 +38,7 @@ estimateGraph <- function(f.mat, d, q = NULL, q.arg = NULL,
             Nsobol <- round(N/(p + d + 1), 0)
         if (is.null(Nsobol) & is.null(N)) 
             stop("either N or Nsobol must be specified")
-        return <- estimateGraphSob(f.mat, d, q, q.arg, Nsobol, ...)
+        tii <- estimateGraphSob(f.mat, d, q, q.arg, Nsobol, ...)
     }
     
     if (method == "FixLO") {
@@ -48,9 +48,9 @@ estimateGraph <- function(f.mat, d, q = NULL, q.arg = NULL,
       }
       if (is.null(nLO) & !is.null(N)) 
         nLO <- round(N/(4*p), 0)
-      if (is.null(Nsobol) & is.null(N)) 
+      if (is.null(nLO) & is.null(N)) 
         stop("either N or nLO must be specified")
-      return <- estimateGraphFixLO(f.mat, d, q, q.arg, nLO, ...)
+      tii <- estimateGraphFixLO(f.mat, d, q, q.arg, nLO, confInt, ...)
     }
         
     if (method == "FixFast") {
@@ -62,9 +62,16 @@ estimateGraph <- function(f.mat, d, q = NULL, q.arg = NULL,
             nMC <- round(N/(p * nfast99), 0)
         if (is.null(nMC) & is.null(N)) 
             stop("either N or nMC must be specified")
-        return <- estimateGraphFixFast(f.mat, d, q, q.arg, nMC, nfast99, 
+        tii <- estimateGraphFixFast(f.mat, d, q, q.arg, nMC, nfast99, 
             ...)
     }
-    
-    return(return)
+    soverall <- fast99(model=f.mat, factors=d, n=1000, q = q, q.arg = q.arg, ...)
+    V <- round(mean(soverall$V),4)
+    i1 <- as.matrix(round(soverall$D1,4))
+    rownames(i1) <- paste("X",1:d,sep="")
+    # estimate cliques
+      E <- t(combn(d,2)[,tii[,1] > 0])
+      cliques <- maximal.cliques(graph(as.vector(t(E)), d + 1, FALSE))[-1]
+      tii.scaled <- tii[,1,drop=FALSE] / V
+    return(list(d=d, tii=tii, i1=i1, V = V, tii.scaled = tii.scaled, cliques = cliques))
 }

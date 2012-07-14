@@ -77,14 +77,16 @@ Rfunc <- function(x, theta, alpha, covtype, n, n.Cl, Cl, iso) {
     ntemp <- 1
     # building up theta.list (theta in clique structure)
     n.Cl.ani <- n.Cl - sum(iso)
-    if (n.Cl.ani>0) {
-      for (j in (1:n.Cl.ani)) {
+    if (n.Cl.ani>0) { 
+      # for (j in (1:n.Cl.ani)) {  # WRONG: DOES NOT RESPECT THE ORDER
+      for (j in (1:n.Cl)[!iso]) {
           theta.list[[j]] <- theta[(ntemp):(ntemp -1 + length(Cl[[j]]))]
           ntemp <- ntemp + length(Cl[[j]])
       }
     }
     if (n.Cl.ani < n.Cl) {
-        for (j in ((n.Cl.ani + 1):n.Cl)) {
+        # for (j in ((n.Cl.ani + 1):n.Cl)) {   #WRONG AGAIN
+        for (j in (1:n.Cl)[iso]) {
             theta.list[[j]] <- theta[ntemp]
             ntemp <- ntemp + 1
         }
@@ -105,13 +107,15 @@ rfunc <- function(newdata, x, theta, alpha, covtype, n.Cl, Cl, iso) {
     ntemp <- 1
     n.Cl.ani <- n.Cl - sum(iso)
     if (n.Cl.ani>0){
-      for (j in (1:n.Cl.ani)) {
+      # for (j in (1:n.Cl.ani)) {  WRONG: DOES NOT RESPECT THE ORDER
+      for (j in (1:n.Cl)[!iso]) {
           theta.list[[j]] <- theta[(ntemp):(ntemp -1 + length(Cl[[j]]))]
           ntemp <- ntemp + length(Cl[[j]])
       }
     }
     if (n.Cl.ani < n.Cl) {
-        for (j in ((n.Cl.ani + 1):n.Cl)) {
+        #for (j in ((n.Cl.ani + 1):n.Cl)) {   WRONG AGAIN
+        for (j in (1:n.Cl)[iso]) {
             theta.list[[j]] <- theta[ntemp]
             ntemp <- ntemp + 1
         }
@@ -206,8 +210,8 @@ yhat <- function(newdata, x, y, parameter, covtype = "gauss", eps.R = 1e-08,
     }
     if (n.Cl == 1 & class(parameter) == "km") {
         warning("used DiceKriging:::predict.km")
-        pred <- predict.km(parameter, newdata = newdata, type = "UK", 
-                           se.compute=se.compute)
+        pred <- predict(parameter, newdata = newdata, type = "UK", 
+                           se.compute=se.compute, checkNames = FALSE)
         if (se.compute)
           result <- data.frame(mean=pred$mean, sd=pred$sd)
         else 

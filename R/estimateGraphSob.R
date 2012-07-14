@@ -38,7 +38,8 @@ estimateGraphSob <- function(f.mat, d, q, q.arg, Nsobol,
     }
     totalInt <- numeric(p)
     for (i in 1:p) totalInt[i] <- sum(DTi[JK[, i]]) - DTij[i]
-    res <- rbind(JK, totalInt)
-    rownames(res) <- NULL
-    res
+    inter <- paste("X",JK[1,],"*","X",JK[2,], sep="")
+    totalInt <- as.matrix(round(totalInt,4))
+    rownames(totalInt) <- inter
+    return(totalInt)
 }

@@ -28,7 +28,7 @@ character string specifying the covariance structure to be used, to be chosen be
 list of cliques
 }
   \item{iso}{
-boolean vector indicating for each clique if it is isotropic (TRUE) or anisotropic (FALSE) with isotropic cliques at the end, defaults to iso = FALSE (all cliques anisotropic)
+boolean vector indicating for each clique if it is isotropic (TRUE) or anisotropic (FALSE), defaults to iso = FALSE (all cliques anisotropic)
 }
   \item{eps.R}{
 small positive number indicating the nugget effect added to the covariance matrix diagonalk, defaults to eps.R = 1e-08
