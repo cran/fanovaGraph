@@ -9,10 +9,10 @@ Estimates and plots the FANOVA graph of a function to identify its interaction s
 \details{
 Important functions:
        \tabular{ll}{
-         \code{estimateGraph} \tab Estimates the total interaction indices of a function \cr
-         \code{threshold} \tab Takes the total interaction indices and creates the graph structure, including a threshold cut for indices lower than a given value \cr
-         \code{plotiGraph} \tab Plots a given graph structure \cr
-         \code{plotDeltaSteps} \tab Provides plots for the choice of the threshold \cr
+         \code{estimateGraph} \tab Estimate indices for the graph, create graph structure\cr
+         \code{threshold} \tab Set indices below a threshold to zero \cr
+         \code{plotiGraph} \tab Plot a given graph structure \cr
+         \code{plotDeltaSteps} \tab Provide plots for the choice of the threshold \cr
          \code{MLoptimConstrained} \tab Kriging model estimation with block-additive kernel \cr
          \code{yhat} \tab Prediction function from Kriging model with block-additive kernel \cr
          \code{simAdd} \tab Simulation from Kriging model with block-additive kernel

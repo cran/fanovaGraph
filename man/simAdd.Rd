@@ -47,7 +47,7 @@ J. Fruth
 }
 
 \seealso{
-\code{\link{MLoptimConstrained}}, \code{\link{simulate.km}}
+\code{\link{MLoptimConstrained}}, \code{\link[DiceKriging]{simulate}}
 }
 \examples{
 ### 2 dimensional simulation

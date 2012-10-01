@@ -1,9 +1,15 @@
 CHANGELOG for fanovaGraph 
 
+version 1.3.1
+* unit tests by testthat
+* adaptions to update in DiceKriging
+
 version 1.3
 * new parameters maximal edge thickness and circle diameter in function "plotiGraph"
 * adaptions according to update to DiceKriging 1.3.3
 * additional confidence intervals for "estimateGraph", method "FixLO"
+* simplified input/output behaviour for all graph related functions: combined list structure as graph object
+
 
 version 1.2
 
