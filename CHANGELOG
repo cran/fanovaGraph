@@ -1,5 +1,10 @@
 CHANGELOG for fanovaGraph 
 
+version 1.4
+* bug for very small indices removed
+* new S3 class "graphlist" with generic function plot 
+* several functions and arguments renamed, most important: MLoptimConstraind -> kmAdditive, yhat -> predictAdditive
+	
 version 1.3.1
 * unit tests by testthat
 * adaptions to update in DiceKriging

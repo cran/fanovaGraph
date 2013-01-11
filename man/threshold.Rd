@@ -10,7 +10,7 @@ threshold(graphlist, delta, scaled = TRUE, robust = FALSE)
 }
 
 \arguments{
-  \item{graphlist}{a list representing the graph structure as obtained from \code{\link{estimateGraph}}
+  \item{graphlist}{an object of class \code{graphlist} as obtained from \code{\link{estimateGraph}}
 }
   \item{delta}{numeric threshold, between 0 and 1 if \code{scaled = TRUE}
 }
@@ -20,7 +20,7 @@ threshold(graphlist, delta, scaled = TRUE, robust = FALSE)
 }
 }
 \value{
- a list of a same structure as the input \code{graphlist} with thresholded indices and updated clique structure, see \code{\link{estimateGraph}} for a detailed description
+ an object of class \code{graphlist} where the indices are thresholded the clique structure is updated respectively, see \code{\link{estimateGraph}} for a detailed description
 }
 
 \section{Warning}{
@@ -42,7 +42,7 @@ krigingMean <- function(Xnew) predict(object = KM, newdata = Xnew,
     type = "UK", se.compute = FALSE, checkNames = FALSE)$mean
     
 # full graph estimation
-g <- estimateGraph(krigingMean, d=3, N=10000, q.arg=list(min=-pi, max=pi))
+g <- estimateGraph(krigingMean, d=3, n.tot=10000, q.arg=list(min=-pi, max=pi))
 print(g[c(2,6)])
 # threshold graph
 g.cut <- threshold(g, delta = 0.1)

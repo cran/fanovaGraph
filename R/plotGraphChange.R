@@ -3,7 +3,7 @@ plotGraphChange <- function(graphlist, fix.layout = TRUE, delta.layout = 0.01) {
     dall <- graphlist$V
     oldPar <- par(c("usr", "xpd"))
     par(usr = c(-1.161, 1.161, -1.17826, 1.17826), xpd = TRUE)
-    delta <- c(0, sort(graphlist$tii/dall), 1)
+    delta <- c(0, sort(graphlist$tii[,1]/dall), 1)
     delta.max <- delta[length(delta) - 1]
     n.CL <- c()
     
@@ -18,9 +18,9 @@ plotGraphChange <- function(graphlist, fix.layout = TRUE, delta.layout = 0.01) {
     for (i in 1:(length(delta) - 1)) {
         graph <- threshold(graphlist, delta = delta[i], scaled = TRUE)
         if (fix.layout == TRUE) {
-            plotiGraph(graph, layout = layout)
+            plot(graph, layout = layout)
         } else {
-            plotiGraph(graph)
+            plot(graph)
         }
         n.CL[i] <- length(graph$cliques)
         text(0, -2, paste("delta = [", round(delta[i], 4), ",", round(delta[i + 

@@ -1,19 +1,17 @@
 export(estimateGraph,
-estimateGraphFixLO,
-estimateGraphFixFast,
-estimateGraphSob,
-estimateGraphRBD,
 kmPredictWrapper,
-MLoptimConstrained,
+kmAdditive,
 plotDeltaJumps,
 plotGraphChange,
-plotiGraph,
+plot.graphlist,
+print.graphlist,
 plotManipulate,
 plotTk,
-simAdd,
+simAdditive,
 threshold,
 totalIndex,
-yhat)
+predictAdditive)
 
 ## (internal comment:)
-## not exported: modify.graph, LogLConstrained, Rfunc, rfunc, paramVect2List, paramList2Vect
+## not exported: modify.graph, LogLConstrained, Rfunc, rfunc, paramVect2List, paramList2Vect, estimateGraphFixLO, estimateGraphFixFast, estimateGraphSob, estimateGraphRBD
+

@@ -9,13 +9,13 @@ Estimates and plots the FANOVA graph of a function to identify its interaction s
 \details{
 Important functions:
        \tabular{ll}{
-         \code{estimateGraph} \tab Estimate indices for the graph, create graph structure\cr
-         \code{threshold} \tab Set indices below a threshold to zero \cr
-         \code{plotiGraph} \tab Plot a given graph structure \cr
-         \code{plotDeltaSteps} \tab Provide plots for the choice of the threshold \cr
-         \code{MLoptimConstrained} \tab Kriging model estimation with block-additive kernel \cr
-         \code{yhat} \tab Prediction function from Kriging model with block-additive kernel \cr
-         \code{simAdd} \tab Simulation from Kriging model with block-additive kernel
+         \code{\link{estimateGraph}} \tab Estimate indices for the graph, create graph structure\cr
+         \code{\link{threshold}} \tab Set indices below a threshold to zero \cr
+         \code{\link{plot.graphlist}} \tab Plot a given graph structure \cr
+         \code{\link{plotDeltaJumps}} \tab Provide plots for the choice of the threshold \cr
+         \code{\link{kmAdditive}} \tab Kriging model estimation with block-additive kernel \cr
+         \code{\link{predictAdditive}} \tab Prediction function from Kriging model with block-additive kernel \cr
+         \code{\link{simAdditive}} \tab Simulation from Kriging model with block-additive kernel
        }
 }
 \author{

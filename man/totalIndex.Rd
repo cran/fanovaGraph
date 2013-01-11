@@ -6,7 +6,7 @@
 \description{Estimation of the unscaled total Sobol index of all main indices by method Liu & Owen (superset importance of main indices).
 }
 \usage{
-totalIndex(f.mat, d, q = NULL, q.arg = NULL, nMC, ...)
+totalIndex(f.mat, d, q = NULL, q.arg = NULL, n.mc, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -19,7 +19,7 @@ totalIndex(f.mat, d, q = NULL, q.arg = NULL, nMC, ...)
 }
   \item{q.arg}{a list of lists of quantile functions parameters of the distributions in \code{q}, it can be a single list meaning same parameters for all, if not specified the default values of the respective distributions are taken
 }
-  \item{nMC}{number of Monte Carlo evaluations
+  \item{n.mc}{number of Monte Carlo evaluations
 }
   \item{...}{additional arguments to be passed to the function \code{f.mat}
 }
@@ -36,6 +36,6 @@ J. Fruth
 \code{\link{estimateGraph}}
 }
 \examples{
-totalIndex(f.mat=ishigami.fun, d=3, q.arg=list(min=-pi,max=pi), nMC=10000)
-totalIndex(f.mat=sobol.fun, d=8, q.arg=list(min=0,max=1), nMC=10000)
+totalIndex(f.mat=ishigami.fun, d=3, q.arg=list(min=-pi,max=pi), n.mc=10000)
+totalIndex(f.mat=sobol.fun, d=8, q.arg=list(min=0,max=1), n.mc=10000)
 }

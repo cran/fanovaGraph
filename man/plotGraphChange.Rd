@@ -12,7 +12,7 @@ plotTk(graphlist, delta.layout=0.01)
 plotManipulate(graphlist, delta.layout=0.01)
 }
 \arguments{
-  \item{graphlist}{a list representing the graph structure as obtained from \code{\link{estimateGraph}}
+  \item{graphlist}{an object of class \code{graphlist} as obtained from \code{\link{estimateGraph}}
 }
 \item{fix.layout}{logical, if TRUE (default) the position of the vertices is fixed for all plots such that the positions are optimal for delta = delta.layout
 }
@@ -26,7 +26,7 @@ plotManipulate(graphlist, delta.layout=0.01)
 }
 
 \seealso{
-\code{\link{plotDeltaJumps}}, \code{\link{plotiGraph}}
+\code{\link{plotDeltaJumps}}, \code{\link{plot.graphlist}}
 }
 \examples{
 # see demo(Threshold)

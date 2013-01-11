@@ -1,4 +1,4 @@
-plotDeltaJumps <- function(graphlist, interval = c(0,1), meanCliqueSize = FALSE) {
+plotDeltaJumps <- function(graphlist, interval = c(0,1), mean.clique.size = FALSE) {
     op <- par(no.readonly = TRUE)
     par(mfrow = c(2, 1), mar = c(0, 4, 1, 0), oma = c(6, 0.5, 2, 1), 
         mgp = c(2.5, 1, 0))
@@ -22,7 +22,7 @@ plotDeltaJumps <- function(graphlist, interval = c(0,1), meanCliqueSize = FALSE)
     }
     plot(1:length(delta), n.CL, type = "s", ylab = "number of cliques", 
         xaxt = "n", ylim = c(0, max(n.CL)))
-    if (meanCliqueSize == TRUE) {
+    if (mean.clique.size == TRUE) {
         lines(1:length(delta), s.CL, type = "s", lty = 3, lwd = 2)
         legend("topright", c("number of cliques", "mean clique size"), 
             lty = c(1, 3))

@@ -36,13 +36,13 @@ plot(i1)
 
 ### estimation of total interaction indices via fixing method
 
-g <- estimateGraph(f.mat = kmPredictWrapper, d = d, N = 30000, q.arg = 
+g <- estimateGraph(f.mat = kmPredictWrapper, d = d, n.tot = 30000, q.arg = 
   list(min = domain[1], max = domain[2]), km.object = KM) 
 print(g$tii)
 
 ### plot the full graph
 
-plotiGraph(g)
+plot(g)
 
 ### threshold decision by looking at DeltaJumps
 
@@ -51,17 +51,17 @@ plotDeltaJumps(g)
 ### threshold inactive edges and plot graph again
 
 g.cut <- threshold(g, delta = 0.01, scale = TRUE)
-plotiGraph(g.cut)
+plot(g.cut)
 
 ### estimate new model
 
 Cliques <- g.cut$cliques
-parameter <- MLoptimConstrained(x, y, Cl = Cliques)
+parameter <- kmAdditive(x, y, cl = Cliques)
 
 ### comparison to standard kriging
 
 xpred <- matrix(runif(d * 1000, domain[1], domain[2]), ncol = d)
-y_new <- yhat(xpred, x, y, parameter, Cl = Cliques)
+y_new <- predictAdditive(xpred, x, y, parameter, cl = Cliques)
 y_old <- kmPredictWrapper(xpred, km.object = KM)
 y_exact <- fun(xpred)
 

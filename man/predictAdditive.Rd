@@ -1,13 +1,13 @@
-\name{yhat}
-\alias{yhat}
+\name{predictAdditive}
+\alias{predictAdditive}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{Prediction Function with Modified Kernel
 }
 \description{Standard kriging prediction function for the modified correlation functions.
 }
 \usage{
-yhat(newdata, x, y, parameter, covtype = "gauss", eps.R = 1e-08, 
-    Cl, iso = FALSE, se.compute=FALSE)
+predictAdditive(newdata, x, y, parameter, covtype = "gauss", eps.R = 1e-08, 
+    cl, iso = FALSE, se.compute=FALSE)
 }
 \arguments{
   \item{newdata}{matrix containing the points where to perform predictions
@@ -16,15 +16,15 @@ yhat(newdata, x, y, parameter, covtype = "gauss", eps.R = 1e-08,
 }
   \item{y}{vector of output data
 }
-  \item{parameter}{(by \code{\link{MLoptimConstrained}} estimated) kriging parameters,
-  list of size of 'Cl' containing for each clique a list of parameters alpha (single value) and theta (numeric vector of values)
+  \item{parameter}{(by \code{\link{kmAdditive}} estimated) kriging parameters,
+  list of size of 'cl' containing for each clique a list of parameters alpha (single value) and theta (numeric vector of values)
 }
   \item{covtype}{an optional character string specifying the covariance structure to be used, 
     to be chosen between "gauss", "matern5_2", "matern3_2", "exp" or "powexp" (see DiceKriging), defaults to "gauss"
 }
   \item{eps.R}{small positive number indicating the nugget effect added to the covariance matrix diagonalk, defaults to \code{eps.R = 1e-08}
 }
-  \item{Cl}{list of cliques
+  \item{cl}{list of cliques
 }
   \item{iso}{boolean vector indicating for each clique if it is isotropic (TRUE) or anisotropic (FALSE), defaults to \code{iso = FALSE} (all cliques anisotropic)
 }
@@ -43,7 +43,7 @@ T. Muehlenstaedt, O. Roustant, J. Fruth
 }
 
 \seealso{
-\code{\link{MLoptimConstrained}}
+\code{\link{kmAdditive}}
 }
 \examples{
 ### example for ishigami function with cliques {1,3} and {2}
@@ -51,14 +51,14 @@ d <- 3
 x <- matrix(runif(100*d,-pi,pi),nc=d)
 y <- ishigami.fun(x)
 
-Cl <- list(c(2), c(1,3))
+cl <- list(c(2), c(1,3))
 
 # constrained ML optimation with kernel defined by the cliques
-parameter <- MLoptimConstrained(x, y, Cl = Cl)
+parameter <- kmAdditive(x, y, cl = cl)
 
 # prediction with the new model
 xpred <- matrix(runif(500 * d,-pi,pi), ncol = d)
-ypred <- yhat(xpred, x, y, parameter, Cl=Cl)
+ypred <- predictAdditive(xpred, x, y, parameter, cl=cl)
 yexact <- ishigami.fun(xpred)
 
 # rmse
@@ -70,13 +70,13 @@ plot(yexact, ypred[,1], asp = 1)
 abline(0, 1)
 
 ### compare to one single clique {1,2,3}
-Cl <- list(c(1,2,3))
+cl <- list(c(1,2,3))
 
 # constrained ML optimation with kernel defined by the cliques
-parameter <- MLoptimConstrained(x, y, Cl = Cl)
+parameter <- kmAdditive(x, y, cl = cl)
 
 # prediction with the new model
-ypred <- yhat(xpred, x, y, parameter, Cl=Cl)
+ypred <- predictAdditive(xpred, x, y, parameter, cl=cl)
 
 # rmse
 sqrt(mean((ypred$mean- yexact)^2))
@@ -88,13 +88,13 @@ abline(0, 1)
 
 ### isotropic cliques
 
-Cl <- list(c(2),c(1,3))
-parameter <- MLoptimConstrained(x, y, Cl = Cl, iso=c(FALSE,TRUE))
-ypred <- yhat(xpred, x, y, parameter, Cl=Cl, iso=c(FALSE,TRUE))
+cl <- list(c(2),c(1,3))
+parameter <- kmAdditive(x, y, cl = cl, iso=c(FALSE,TRUE))
+ypred <- predictAdditive(xpred, x, y, parameter, cl=cl, iso=c(FALSE,TRUE))
 sqrt(mean((ypred$mean- yexact)^2))
 
 # the same since first clique has length 1
-parameter <- MLoptimConstrained(x, y, Cl = Cl, iso=c(TRUE,TRUE))
-ypred <- yhat(xpred, x, y, parameter, Cl=Cl, iso=c(TRUE,TRUE))
+parameter <- kmAdditive(x, y, cl = cl, iso=c(TRUE,TRUE))
+ypred <- predictAdditive(xpred, x, y, parameter, cl=cl, iso=c(TRUE,TRUE))
 sqrt(mean((ypred$mean- yexact)^2))
 }

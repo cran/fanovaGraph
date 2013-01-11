@@ -1,8 +1,8 @@
-estimateGraphFixFast <- function(f.mat, d, q, q.arg, nMC, nfast99, ...) {
+estimateGraphFixFast <- function(f.mat, d, q, q.arg, n.mc, n.fast, ...) {
     # FAST frequencies
     w <- c(11, 35)
-    if (nfast99 < 2 * 6 * max(w)) 
-        stop("nfast99 too small to guarantee positive values")
+    if (n.fast < 2 * 6 * max(w)) 
+        stop("n.fast too small to guarantee positive values")
     fast <- function(f, ...) {
         Y <- drop(f(X, ...))
         Var <- 2 * sum(colMeans(Y * sinsop)^2 + colMeans(Y * cossop)^2)
@@ -14,7 +14,7 @@ estimateGraphFixFast <- function(f.mat, d, q, q.arg, nMC, nfast99, ...) {
     }
     ## the fixed values, only d-2 points needed, but programming much
     #   shorter with d
-    SampleFixed <- matrix(runif(nMC * d), ncol = d)
+    SampleFixed <- matrix(runif(n.mc * d), ncol = d)
     for (j in 1:d) SampleFixed[, j] <- do.call(q[j], c(list(p = SampleFixed[, 
         j]), q.arg[[j]]))
     # function f.mat but depending only on Xjk, other variables fixed
@@ -28,30 +28,30 @@ estimateGraphFixFast <- function(f.mat, d, q, q.arg, nMC, nfast99, ...) {
     JK <- t(combn(1:d, 2))
     DintJK <- numeric(dim(JK)[1])
     # Design matrix for fast:
-    s <- seq(-pi, pi, len = nfast99)
+    s <- seq(-pi, pi, len = n.fast)
     p <- 1:210
     sop <- s %o% p
     sinsop <- sin(sop)
     cossop <- cos(sop)
     harm1 <- 1:6 * w[1]
     harm2 <- 1:6 * w[2]
-    X01 <- matrix(, nrow = nfast99, ncol = 2)
+    X01 <- matrix(, nrow = n.fast, ncol = 2)
     for (i in 1:2)
       X01[, i] <- 1/2 + 1/pi * asin(sin(w[i] * s))
-    X <- matrix(, nrow = nfast99, ncol = 2)
+    X <- matrix(, nrow = n.fast, ncol = 2)
     for (j in 1:nrow(JK)) {
         for (i in 1:2) {
            X[, i] <- do.call(q[JK[j,i]], c(list(p = X01[, i]), q.arg[[JK[j,i]]]))
         }
-      Dint <- numeric(nMC)
+      Dint <- numeric(n.mc)
         message(paste("index = ", paste(JK[j, ], collapse="")))
-        for (m in (1:nMC)) {
+        for (m in (1:n.mc)) {
             Dint[m] <- fast(fjk.mat, jk = JK[j, ], xfixed = SampleFixed[m, ], ...)
         }
         DintJK[j] <- mean(Dint)
     }
     inter <- paste("X",JK[,1],"*","X",JK[,2], sep="")
-    totalInt <- as.matrix(round(DintJK,4))
+    totalInt <- as.matrix(DintJK)
     rownames(totalInt) <- inter
     return(totalInt)
 } 

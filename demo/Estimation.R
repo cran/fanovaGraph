@@ -31,13 +31,13 @@ Int4 <- matrix(, N.run, choose(d, 2))
 
 for (i in 1:N.run) {
     print(paste("i=", i))
-    Int1[i, ] <- estimateGraph(fun, d = d, N = N.eval, method = "FixLO", 
+    Int1[i, ] <- estimateGraph(fun, d = d, n.tot = N.eval, method = "FixLO", 
         q.arg = list(min = domain[1], max = domain[2]))$tii[,1]
-    Int2[i, ] <- estimateGraph(fun, d = d, N = N.eval, method = "FixFast", 
+    Int2[i, ] <- estimateGraph(fun, d = d, n.tot = N.eval, method = "FixFast", 
         q.arg = list(min = domain[1], max = domain[2]))$tii[,1]
-    Int3[i, ] <- estimateGraph(fun, d = d, N = N.eval, method = "RBD", 
+    Int3[i, ] <- estimateGraph(fun, d = d, n.tot = N.eval, method = "RBD", 
         q.arg = list(min = domain[1], max = domain[2]))$tii[,1]
-    Int4[i, ] <- estimateGraph(fun, d = d, N = N.eval, method = "Sobol", 
+    Int4[i, ] <- estimateGraph(fun, d = d, n.tot = N.eval, method = "Sobol", 
         q.arg = list(min = domain[1], max = domain[2]))$tii[,1]
 }
 

@@ -4,7 +4,6 @@
 
 test_that("the full example works as before", {
   
-  
 d <- 6     
 domain <- c(-1,1)
 
@@ -61,13 +60,13 @@ expect_equal(0.7772051, mean(soverall$V))
 
 ### estimation by function "estimateGraph" with fixing method
 set.seed(1)
-totalInt <- estimateGraph(f.mat=krigingMean, d=d, N=10000,
+totalInt <- estimateGraph(f.mat=krigingMean, d=d, n.tot=10000,
                           q.arg=list(min=domain[1],max=domain[2]), method="FixFast")
-expect_equivalent(c(0.0033, 0.0095), totalInt$tii[1:2,1])  
+expect_equivalent(c(0.003276626653, 0.009495300733), totalInt$tii[1:2,1])  
 
-totalInt <- estimateGraph(f.mat=krigingMean, d=d, N=10000,
+totalInt <- estimateGraph(f.mat=krigingMean, d=d, n.tot=10000,
                           q.arg=list(min=domain[1],max=domain[2]), method="FixLO")
-expect_equivalent(c(0.0012, 0.0401), totalInt$tii[1:2,1])
+expect_equivalent(c(0.001187202208, 0.040101771320), totalInt$tii[1:2,1])
 
 
 ##########################################
@@ -78,71 +77,74 @@ expect_equivalent(c(0.0012, 0.0401), totalInt$tii[1:2,1])
 
 graph <- threshold(totalInt, delta = 0.01)
 
-Cl <- graph$cliques
-expect_equal(list(c(1,3,5),c(2,4,6)),Cl)
+cl <- graph$cliques
+expect_equal(list(c(1,3,5),c(2,4,6)),cl)
 
 
 ##############################
 ### estimating the new model
 ##############################
 
-## new kernel estimation by function "MLoptimConstrained"
-## and prediction by function "yhat"
+## new kernel estimation by function "kmAdditive"
+## and prediction by function "predictAdditive"
 
-Cl <- list(c(1, 3, 5),c(2, 4, 6))
+cl <- list(c(1, 3, 5),c(2, 4, 6))
 eps.R <-  1e-04
 eps.Var <- 1e-4
-nMaxit <- 100
+nMaxit <- 30
 nInitial <- 20
 
 set.seed(1)
-parameter <- MLoptimConstrained(x=L, y, n.initialtries = nInitial, eps.R = eps.R, 
-      Cl=Cl, covtype = covtype, eps.Var = eps.Var, MAXIT = nMaxit, iso = FALSE)
-expect_equal(0.492900404, parameter[[1]]$alpha)
-ypred <- yhat(xpred, x=L, y, parameter, covtype = covtype, eps.R = eps.R, Cl)
-expect_equal(0.0429707179, sqrt(mean((ypred$mean - yexact)^2)))
+parameter <- kmAdditive(x=L, y, n.initial.tries = nInitial, eps.R = eps.R, 
+      cl=cl, covtype = covtype, eps.Var = eps.Var, max.it = nMaxit, iso = FALSE)
+expect_equal(0.517164345, parameter[[1]]$alpha)
+ypred <- predictAdditive(xpred, x=L, y, parameter, covtype = covtype, eps.R = eps.R, cl)
+expect_equal(0.05050225006, sqrt(mean((ypred$mean - yexact)^2)))
 
 ### isotropic clique
 set.seed(1)
-parameter <- MLoptimConstrained(x=L, y, n.initialtries = nInitial, eps.R = eps.R, 
-                                Cl=Cl, covtype = covtype, eps.Var = eps.Var, MAXIT = nMaxit, iso = c(FALSE,TRUE))
-expect_equal(1.90368446, parameter[[2]]$theta)
-ypred <- yhat(xpred, x=L, y, parameter, covtype = covtype, eps.R = eps.R, Cl, iso=c(FALSE,TRUE))
-expect_equal(0.0424629352, sqrt(mean((ypred$mean- yexact)^2)))
+parameter <- kmAdditive(x=L, y, n.initial.tries = nInitial, eps.R = eps.R, 
+                                cl=cl, covtype = covtype, eps.Var = eps.Var, 
+                                max.it = nMaxit, iso = c(FALSE,TRUE))
+expect_equal(1.902815638, parameter[[2]]$theta)
+ypred <- predictAdditive(xpred, x=L, y, parameter, covtype = covtype, eps.R = eps.R, 
+              cl, iso=c(FALSE,TRUE))
+expect_equal(0.04277603821, sqrt(mean((ypred$mean- yexact)^2)))
 
 ### two isotropic cliques
 set.seed(1)
-parameter <- MLoptimConstrained(x=L, y, n.initialtries = nInitial, 
-                                eps.R = eps.R, Cl=Cl, covtype = covtype, eps.Var = eps.Var, 
-                                MAXIT = nMaxit, iso = c(TRUE,TRUE))
-expect_equal(1.90394986, parameter[[2]]$theta)
-ypred <- yhat(xpred, x=L, y, parameter, covtype = covtype, eps.R = eps.R, 
-              Cl, iso=c(TRUE,TRUE))
-expect_equal(0.0424650539, sqrt(mean((ypred$mean- yexact)^2)))
+parameter <- kmAdditive(x=L, y, n.initial.tries = nInitial, 
+                                eps.R = eps.R, cl=cl, covtype = covtype, eps.Var = eps.Var, 
+                                max.it = nMaxit, iso = c(TRUE,TRUE))
+expect_equal( 1.904219623, parameter[[2]]$theta)
+ypred <- predictAdditive(xpred, x=L, y, parameter, covtype = covtype, eps.R = eps.R, 
+              cl, iso=c(TRUE,TRUE))
+expect_equal( 0.04246029631, sqrt(mean((ypred$mean- yexact)^2)))
 
 ### single clique (km is used for estimation and prediction)
-Cl <- list(1:6)
+cl <- list(1:6)
 set.seed(1)
-parameter <- MLoptimConstrained(x=L, y, Cl=Cl, covtype=covtype)
+parameter <- kmAdditive(x=L, y, cl=cl, covtype=covtype)
 expect_equal(parameter@covariance@sd2, KM@covariance@sd2)
-ypred <- yhat(xpred, x=L, y, parameter, covtype = covtype, Cl=Cl)
+ypred <- predictAdditive(xpred, x=L, y, parameter, covtype = covtype, cl=cl)
 expect_true(all(ypred$mean == yKM))
+})
 
-### simulation from the new kernel
-Cl <- list(c(1, 3, 5),c(2, 4, 6))
+test_that("simulation works", {
+cl <- list(c(1, 3, 5),c(2, 4, 6))
+d <- 6
 parameter <- list(list(alpha=0.53,theta=c(1.7,1.8,1.8)),
                   list(alpha=0.47,theta=c(1.9,1.9,1.7)))
 set.seed(1)
-xsimu <- matrix(runif(d*3,domain[1],domain[2]),3,d)
+xsimu <- matrix(runif(d*3,-1,1),3,d)
 
 expect_equal(c(-0.305388389,  0.792219843,  0.313896841),
-       simAdd(xsimu, mu=0, parameter, covtype, Cl, iso=FALSE))    
+       simAdditive(xsimu, mu=0, parameter, "matern5_2", cl, iso=FALSE))    
 
 parameter <- list(list(alpha=0.53,theta=c(1.7,1.8,1.8)),
                   list(alpha=0.47,theta=c(1.1)))
 set.seed(1)
-xsimu <- matrix(runif(d*3,domain[1],domain[2]),3,d)
+xsimu <- matrix(runif(d*3,-1,1),3,d)
 expect_equal(c(-0.305388389, 0.812151639, 0.288423824),
-     simAdd(xsimu, mu=0, parameter, covtype, Cl, iso=c(FALSE,TRUE)))
-# [1] -0.3053884  0.8121516  0.2884238
+     simAdditive(xsimu, mu=0, parameter, "matern5_2", cl, iso=c(FALSE,TRUE)))
 })

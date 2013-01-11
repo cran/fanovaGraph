@@ -1,7 +1,8 @@
-plotiGraph <- function(graphlist, names = NULL, i2 = NULL, layout = NULL, 
-                       ploti1 = TRUE, maxThickness=20, circleDiameter=40) {
+plot.graphlist <- function(x, names = NULL, i2 = NULL, layout = NULL, 
+                       plot.i1 = TRUE, max.thickness=20, circle.diameter=40, ...) {
     oldPar <- par(no.readonly = TRUE)
       ## igraph changes settings at least for abline
+    graphlist <- x
     fanovaGraph:::modify.igraph()
     d <- graphlist$d
     V <- graphlist$V
@@ -20,12 +21,12 @@ plotiGraph <- function(graphlist, names = NULL, i2 = NULL, layout = NULL,
     if (is.null(names)) {
       names <- 1:d
     }
-    max.frame.width <- maxThickness
+    max.frame.width <- max.thickness
       ## thickness of the greates value
-    V(g)$size <- circleDiameter
+    V(g)$size <- circle.diameter
       ## vertex size (circle diameter)
   ###################################
-    if(ploti1 == FALSE){
+    if(plot.i1 == FALSE){
       i1 <- rep(0,d)
     }
   ###################################
@@ -37,7 +38,7 @@ plotiGraph <- function(graphlist, names = NULL, i2 = NULL, layout = NULL,
     edge.weight.scale <- tii * max.frame.width/max
     e.col <- "darkgreen"
     
-    if (ploti1 == FALSE){
+    if (plot.i1 == FALSE){
       vertex.weight.scale = 4
       v.col <- "black"
     }

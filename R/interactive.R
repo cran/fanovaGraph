@@ -11,7 +11,7 @@ plotTk <- function(graphlist, delta.layout = 0.01) {
     
     plotting <- function(delta) {
         graph <- threshold(graphlist, delta=delta, scaled = TRUE)
-        plotiGraph(graph, layout = layout)
+        plot.graphlist(graph, layout = layout)
         n.CL <- length(graph$cliques)
         title(main = paste("delta =", round(delta, 5)))
         title(sub = paste("number of cliques =", n.CL))
@@ -46,7 +46,7 @@ plotManipulate <- function(graphlist, delta.layout = 0.01) {
     
     plotting <- function(delta) {
         graph <- threshold(graphlist, delta=delta, scaled = TRUE)
-        plotiGraph(graph, layout = layout)
+        plot.graphlist(graph, layout = layout)
         n.CL <- length(graph$cliques)
         title(main = paste("delta =", round(delta, 5)))
         title(sub = paste("number of cliques =", n.CL))

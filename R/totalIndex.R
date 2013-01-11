@@ -1,4 +1,4 @@
-totalIndex <- function(f.mat, d, q=NULL, q.arg=NULL, nMC, ...)
+totalIndex <- function(f.mat, d, q=NULL, q.arg=NULL, n.mc, ...)
 {
   if (is.null(q)) {
     q <- rep("qunif", d)
@@ -10,9 +10,9 @@ totalIndex <- function(f.mat, d, q=NULL, q.arg=NULL, nMC, ...)
   } else if (FALSE %in% sapply(q.arg, is.list)) {
     q.arg <- rep(list(q.arg), d)
   }
-  X <- matrix(runif(nMC * d), ncol = d)
+  X <- matrix(runif(n.mc * d), ncol = d)
   for (j in 1:d) X[, j] <- do.call(q[j], c(list(p = X[,j]), q.arg[[j]]))
-  Z <- matrix(runif(nMC * d), ncol = d)
+  Z <- matrix(runif(n.mc * d), ncol = d)
   for (j in 1:d) Z[, j] <- do.call(q[j], c(list(p = Z[,j]), q.arg[[j]]))
   yZ <- f.mat(Z,...)
   
@@ -21,7 +21,7 @@ totalIndex <- function(f.mat, d, q=NULL, q.arg=NULL, nMC, ...)
   for (i in 1:d){
     ZXi <- Z
     ZXi[,i] <- X[,i]
-    DT[i] <- 1/(nMC*2)*sum( (f.mat(ZXi,...) - yZ)^2)
+    DT[i] <- 1/(n.mc*2)*sum( (f.mat(ZXi,...) - yZ)^2)
   }
   return(DT)
 }

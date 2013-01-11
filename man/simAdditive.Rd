@@ -1,5 +1,5 @@
-\name{simAdd}
-\alias{simAdd}
+\name{simAdditive}
+\alias{simAdditive}
 
 \title{
 Simulate GP values from block-addtive kernel
@@ -8,7 +8,7 @@ Simulate GP values from block-addtive kernel
 Simulate Gaussian process values from a given block-additive kernel
 }
 \usage{
-simAdd(newdata, mu, parameter, covtype, Cl, iso = FALSE, eps.R = 1e-08)
+simAdditive(newdata, mu, parameter, covtype, cl, iso = FALSE, eps.R = 1e-08)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -19,12 +19,12 @@ matrix containing the points where to perform simulations
 trend parameter
 }
   \item{parameter}{
-list of size of 'Cl' containing for each clique a list of parameters alpha (single value) and theta (numeric vector of values)
+list of size of 'cl' containing for each clique a list of parameters alpha (single value) and theta (numeric vector of values)
 }
   \item{covtype}{
 character string specifying the covariance structure to be used, to be chosen between "gauss", "matern5_2", "matern3_2", "exp" or "powexp" (see DiceKriging)
 }
-  \item{Cl}{
+  \item{cl}{
 list of cliques
 }
   \item{iso}{
@@ -47,7 +47,7 @@ J. Fruth
 }
 
 \seealso{
-\code{\link{MLoptimConstrained}}, \code{\link[DiceKriging]{simulate}}
+\code{\link{kmAdditive}}, \code{\link[DiceKriging]{simulate}}
 }
 \examples{
 ### 2 dimensional simulation
@@ -59,17 +59,17 @@ mu <- 0
 op <- par(no.readonly=TRUE); par(mfrow=c(1,2), mar=c(1,1,1,1))
 # non-additive simulation
 parameter <- list(list(alpha=1, theta=c(0.8,0.8)))
-Cl <- list(1:2)
+cl <- list(1:2)
 set.seed(1)
-y <- simAdd(x, mu, parameter, covtype, Cl)
+y <- simAdditive(x, mu, parameter, covtype, cl)
 persp(x1,x2, matrix(y,20), theta=-40, col="lightblue", zlab="y")
 
 # additive simulation
 parameter <- list(list(alpha=0.5, theta=0.8),
                   list(alpha=0.5, theta=0.8))
-Cl <- list(1,2)
+cl <- list(1,2)
 set.seed(1)
-y <- simAdd(x, mu, parameter, covtype, Cl)
+y <- simAdditive(x, mu, parameter, covtype, cl)
 persp(x1,x2, matrix(y,20), theta=-40, col="lightblue", zlab="y")
 
 par(op)

@@ -7,15 +7,15 @@ Delta Jump Plot
 \description{Threshold discision plot. \code{plotDeltaJumps} plots the threshold steps (the values of delta at which the graph changes) equidistant against the number of cliques and the values of delta on the real axis. The indices are assumed to be scaled for the threshold cuts.
 }
 \usage{
-plotDeltaJumps(graphlist, interval = c(0, 1), meanCliqueSize = FALSE)
+plotDeltaJumps(graphlist, interval = c(0, 1), mean.clique.size = FALSE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{graphlist}{a list representing the graph structure as obtained from \code{\link{estimateGraph}}
+  \item{graphlist}{an object of class \code{graphlist} as obtained from \code{\link{estimateGraph}}
 }
 \item{interval}{an optional vector of size 2, range for the values of delta to be shown in the plot, defaults to c(0,1)
 }
-  \item{meanCliqueSize}{logical, if TRUE (default) an additional line is drawn representing 
+  \item{mean.clique.size}{logical, if TRUE (default) an additional line is drawn representing 
         the mean of the number of vertices in the cliques
 }
 }
