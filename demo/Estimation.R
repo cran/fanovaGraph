@@ -31,13 +31,13 @@ Int4 <- matrix(, N.run, choose(d, 2))
 
 for (i in 1:N.run) {
     print(paste("i=", i))
-    Int1[i, ] <- estimateGraph(fun, d = d, n.tot = N.eval, method = "FixLO", 
+    Int1[i, ] <- estimateGraph(fun, d = d, n.tot = N.eval, method = "LiuOwen", 
         q.arg = list(min = domain[1], max = domain[2]))$tii[,1]
     Int2[i, ] <- estimateGraph(fun, d = d, n.tot = N.eval, method = "FixFast", 
         q.arg = list(min = domain[1], max = domain[2]))$tii[,1]
     Int3[i, ] <- estimateGraph(fun, d = d, n.tot = N.eval, method = "RBD", 
         q.arg = list(min = domain[1], max = domain[2]))$tii[,1]
-    Int4[i, ] <- estimateGraph(fun, d = d, n.tot = N.eval, method = "Sobol", 
+    Int4[i, ] <- estimateGraph(fun, d = d, n.tot = N.eval, method = "PickFreeze", 
         q.arg = list(min = domain[1], max = domain[2]))$tii[,1]
 }
 
@@ -58,6 +58,6 @@ points(1:choose(d, 2), true, cex = 1, pch = 4, col=1)
 abline(h = 0, v = 1:(choose(d, 2) - 1) + 0.5, lty = 3)
 axis(1, at = 1:choose(d, 2), labels = paste(combn(d, 2)[1, 
     ], combn(d, 2)[2, ], sep = ""))
-legend("topright", legend = c("FixLO", "FixFast", "RBD",
-    "Sobol", "true value"), pch = c(22, 22, 22, 22, 4), col = 1, cex = 0.6, 
+legend("topright", legend = c("LiuOwen", "FixFast", "RBD",
+    "PickFreeze", "true value"), pch = c(22, 22, 22, 22, 4), col = 1, cex = 0.6, 
     pt.bg = c(0, 2,3,4)) 

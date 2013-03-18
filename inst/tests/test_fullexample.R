@@ -17,10 +17,7 @@ Bsp <- function(x){
 
 ### maximin design with package "lhs" 
 
-library(lhs)
-set.seed(1)
-L01 <- maximinLHS(100, d)
-L <- L01 * (domain[2]-domain[1]) + domain[1]
+data(L)
 
 ### kriging model with package "DiceKriging"
 
@@ -64,10 +61,10 @@ totalInt <- estimateGraph(f.mat=krigingMean, d=d, n.tot=10000,
                           q.arg=list(min=domain[1],max=domain[2]), method="FixFast")
 expect_equivalent(c(0.003276626653, 0.009495300733), totalInt$tii[1:2,1])  
 
+set.seed(1)
 totalInt <- estimateGraph(f.mat=krigingMean, d=d, n.tot=10000,
-                          q.arg=list(min=domain[1],max=domain[2]), method="FixLO")
-expect_equivalent(c(0.001187202208, 0.040101771320), totalInt$tii[1:2,1])
-
+                          q.arg=list(min=domain[1],max=domain[2]), method="LiuOwen")
+expect_equivalent(c(0.001869581276145, 0.043586803962427), totalInt$tii[1:2,1])
 
 ##########################################
 ### Graph plotting

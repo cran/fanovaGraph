@@ -11,10 +11,8 @@ domain <- c(-pi, pi)
 fun <- ishigami.fun
 
 ### maximin design via package 'lhs'
-
-library(lhs)
-L01 <- maximinLHS(100, d)
-x <- L01 * (domain[2] - domain[1]) + domain[1]
+data(L)
+x<-pi*L[,1:3]
 
 ### kriging model via package 'DiceKriging'
 

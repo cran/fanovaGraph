@@ -1,13 +1,13 @@
 test_that("estimateGraph works for different n.tot and d for all methods",{
   set.seed(1)
-  expect_equivalent(c(0, 3.231419477, 0), 
+  expect_equivalent(c(0, 1.02621411114, 0), 
       estimateGraph(f.mat=ishigami.fun, d=3, q.arg=list(min=-pi,max=pi), 
-                             n.tot=100, method="FixLO")$tii[,1])
+                             n.tot=100, method="LiuOwen")$tii[,1])
   fun <- function(x) x[,1]*x[,2]
 
   set.seed(1)
   expect_equivalent(0.006885859902, 
-                    estimateGraph(f.mat=fun, d=2, n.tot=10000, method="FixLO")$tii[,1])
+                    estimateGraph(f.mat=fun, d=2, n.tot=10000, method="LiuOwen")$tii[,1])
   
   set.seed(1)
   expect_equivalent(3.291240347 , 
@@ -18,9 +18,9 @@ test_that("estimateGraph works for different n.tot and d for all methods",{
                     estimateGraph(f.mat=fun, d=2, n.tot=10000, method="FixFast")$tii[,1])
   
   set.seed(1)
-  expect_equivalent(-0.4706963569, 
+  expect_equivalent(2.621781995673, 
                     estimateGraph(f.mat=ishigami.fun, d=3, q.arg=list(min=-pi,max=pi), 
-                                  n.tot=100, method="Sobol")$tii[2,1])
+                                  n.tot=100, method="PickFreeze")$tii[2,1])
   
   set.seed(1)
   expect_equivalent(-60.94382090, 
@@ -34,9 +34,9 @@ test_that("estimateGraph works for different n.tot and d for all methods",{
 test_that("estimateGraph works for very small values",{
   fun <- function(x) ishigami.fun(x)/1000
   set.seed(1)
-  expect_equivalent(0.000003231419477, 
+  expect_equivalent(0.00000102621411114, 
                     estimateGraph(f.mat=fun, d=3, q.arg=list(min=-pi,max=pi), 
-                                  n.tot=100, method="FixLO")$tii[2,1])
+                                  n.tot=100, method="LiuOwen")$tii[2,1])
 })
 
 test_that("totalIndex works",{
@@ -51,7 +51,21 @@ test_that("totalIndex works",{
 test_that("confint works for estimateGraph",{
   set.seed(1)
   g <- estimateGraph(f.mat=ishigami.fun, d=3, q.arg=list(min=-pi,max=pi), 
-                n.tot=100, method="FixLO")
+                n.tot=1000, method="LiuOwen")
   expect_equal(c(3,4), dim(g$tii))
-  expect_equivalent(2.705853788, g$tii[2,2])
+  expect_equivalent(0.8796950352725, g$tii[2,2])
+})
+
+test_that("overall variance and standard sobol indices work",{
+  set.seed(1)
+  g <- estimateGraph(f.mat=ishigami.fun, d=3, q.arg=list(min=-pi,max=pi), 
+                     n.tot=100, method="LiuOwen")
+  expect_equivalent(13.68750659404, g$V)        
+  expect_equivalent(6.488175898052, g$i1[2,1])  
+  
+  set.seed(1)
+  g.norm <- estimateGraph(f.mat=ishigami.fun, d=3, q="qnorm", q.arg=list(mean=0, sd=2), 
+                               n.tot=100, method="LiuOwen")
+  expect_equivalent(107.8001667819, g.norm$V)          
+  expect_equivalent(6.817385649107, g.norm$i1[2,1])   
 })

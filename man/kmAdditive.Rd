@@ -6,7 +6,8 @@
 \description{Constrained MLE optimization for kernels defined by cliques using \code{\link{constrOptim}}
 }
 \usage{
-kmAdditive(x, y, n.initial.tries = 50, limits = NULL, eps.R = 1e-08, cl, covtype = "gauss", eps.Var = 1e-06, max.it = 1000, iso = FALSE)
+kmAdditive(x, y, n.initial.tries = 50, limits = NULL, eps.R = 1e-08, cl, 
+covtype = "gauss", eps.Var = 1e-06, max.it = 1000, iso = FALSE)
 }
 
 \arguments{

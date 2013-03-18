@@ -1,6 +1,6 @@
 totalIndex <- function(f.mat, d, q=NULL, q.arg=NULL, n.mc, ...)
 {
-  if (is.null(q)) {
+  if (is.null(q)) {     
     q <- rep("qunif", d)
   } else if (length(q) == 1) {
     q <- rep(q, d)

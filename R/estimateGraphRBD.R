@@ -1,4 +1,4 @@
-estimateGraphRBD <- function(f.mat, d, q, q.arg, L, M, ...) {
+estimateGraphRBD <- function(f.mat, d, q, q.arg, L, M, print.loop.index, ...) {
     if (L > 4000) 
         stop("L < 4000 required")
     N <- 2 * (M * d + L)
@@ -19,7 +19,7 @@ estimateGraphRBD <- function(f.mat, d, q, q.arg, L, M, ...) {
         DTi <- numeric(ncol(JK))
         for (i in 1:ncol(JK)) {
             # for all factor combinations
-          message(paste("index = ", paste(JK[,i], collapse="")))
+            if(print.loop.index) cat("index = ", JK[,i],"\n") 
             Xs <- X
             o <- sample(1:N)  # X sampled at i
             Xs[, JK[, i]] <- Xs[o, JK[, i]]

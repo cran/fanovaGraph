@@ -7,7 +7,8 @@
 \description{
 Plot FANOVA graphs using functions from package \code{\link[igraph0:igraph-package]{igraph0}}.}
 \usage{
-\method{plot}{graphlist}(x, names = NULL, i2 = NULL, layout = NULL, plot.i1 = TRUE, max.thickness=20, circle.diameter=40, ...)
+\method{plot}{graphlist}(x, names = NULL, i2 = NULL, layout = NULL, plot.i1 = TRUE, max.thickness=20, 
+circle.diameter=40, ...)
 }
 \arguments{
   \item{x}{an object of class \code{graphlist} as obtained from \code{\link{estimateGraph}}
@@ -47,15 +48,18 @@ plot(g1, names=c("A","B","C"))
 plot(g1, names=c("A","B","C"), plot.i1 = FALSE)
 
 # include pure second order indices
-g2 <- estimateGraph(f.mat=function(x) x[,1]*x[,2]*x[,3]+x[,2]*x[,3], d=3, q.arg=list(min=-1,max=1), n.tot=10000)
+g2 <- estimateGraph(f.mat=function(x) x[,1]*x[,2]*x[,3]+x[,2]*x[,3], d=3, 
+  q.arg=list(min=-1,max=1), n.tot=10000)
 
 plot(g2)
 plot(g2, i2 = c(0.001, 0.001, 0.05))
 
 # equal layouts and different edge thicknesses and circle diameters
-g3 <- estimateGraph(f.mat=function(x) x[,1]*x[,2]*x[,3]*x[,4]*x[,5], d=5, q.arg=list(min=-1,max=1), n.tot=10000)
+g3 <- estimateGraph(f.mat=function(x) x[,1]*x[,2]*x[,3]*x[,4]*x[,5], d=5, 
+  q.arg=list(min=-1,max=1), n.tot=10000)
 
-g4 <- estimateGraph(f.mat=function(x) x[,1]*x[,2]*x[,3]+x[,4]*x[,5], d=5, q.arg=list(min=-1,max=1), n.tot=10000)
+g4 <- estimateGraph(f.mat=function(x) x[,1]*x[,2]*x[,3]+x[,4]*x[,5], d=5, 
+  q.arg=list(min=-1,max=1), n.tot=10000)
 
 graphClassIgraph <- graph.full(n = 5, directed = FALSE)
 layout <- layout.circle(graphClassIgraph)

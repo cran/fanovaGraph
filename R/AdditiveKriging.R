@@ -49,7 +49,7 @@ paramList2Vect <- function(paramList, cl, iso)
 ### Likelihood for constrained optimization
 
 LogLConstrained <- function(parameter, y, x, DM, n, covtype, 
-    eps.R = 1e-12, n.cl, cl, LogLik = "ML", iso = FALSE) {
+    eps.R = 1e-12, n.cl, cl, LogLik = "ML", iso) {
     parameter <- c(parameter[1:(n.cl - 1)], 1 - sum(parameter[1:(n.cl - 
         1)]), parameter[(n.cl):length(parameter)])
     alpha <- parameter[1:n.cl]

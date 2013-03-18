@@ -1,4 +1,4 @@
-estimateGraphFixFast <- function(f.mat, d, q, q.arg, n.mc, n.fast, ...) {
+estimateGraphFixFast <- function(f.mat, d, q, q.arg, n.mc, n.fast, print.loop.index, ...) {
     # FAST frequencies
     w <- c(11, 35)
     if (n.fast < 2 * 6 * max(w)) 
@@ -44,7 +44,7 @@ estimateGraphFixFast <- function(f.mat, d, q, q.arg, n.mc, n.fast, ...) {
            X[, i] <- do.call(q[JK[j,i]], c(list(p = X01[, i]), q.arg[[JK[j,i]]]))
         }
       Dint <- numeric(n.mc)
-        message(paste("index = ", paste(JK[j, ], collapse="")))
+        if(print.loop.index) cat("index = ", JK[j, ],"\n") # collapse=""
         for (m in (1:n.mc)) {
             Dint[m] <- fast(fjk.mat, jk = JK[j, ], xfixed = SampleFixed[m, ], ...)
         }

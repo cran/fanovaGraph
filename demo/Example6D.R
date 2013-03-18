@@ -18,10 +18,8 @@ fun <- function(x) {
 
 ### maximin design via package 'lhs'
 
-library(lhs)
-L01 <- maximinLHS(100, d)
-x <- L01 * (domain[2] - domain[1]) + domain[1]
-
+data(L)
+x<-L
 ### kriging model via package 'DiceKriging'
 
 y <- fun(x)

@@ -1,4 +1,11 @@
 CHANGELOG for fanovaGraph 
+version 1.4.2
+* in estimateGraph: full set estimation strategs implemented for method by Liu Owen and pick-and-freeze method (former Sobol method)
+* new function i2Index for the estimation of pure second-order Sobol indices
+
+version 1.4.1
+* LHS-dataset added
+* in estimateGraph: main indices no longer by sensitivity::fast99, but by new internal function mainEffectIndices
 
 version 1.4
 * bug for very small indices removed
@@ -10,7 +17,7 @@ version 1.3.1
 * adaptions to update in DiceKriging
 
 version 1.3
-* new parameters maximal edge thickness and circle diameter in function "plotiGraph"
+* new parameters maximal edge thickness and circle diameter in function plotiGraph
 * adaptions according to update to DiceKriging 1.3.3
 * additional confidence intervals for "estimateGraph", method "FixLO"
 * simplified input/output behaviour for all graph related functions: combined list structure as graph object
@@ -24,7 +31,7 @@ version 1.2
 
 version 1.1
 
-* new function "simAdd" to simulate from additive kernels
+* new function simAdd to simulate from additive kernels
 * new method for total interaction estimation "FixLO"
 * bug fixed for isotropic and single cliques
-* for kriging prediction "yhat": changed input order, faster computation, prediction variance
+* for kriging prediction yhat: changed input order, faster computation, prediction variance

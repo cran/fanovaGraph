@@ -32,7 +32,8 @@ plot.graphlist <- function(x, names = NULL, i2 = NULL, layout = NULL,
   ###################################
     ## scaling
     max <- max(c(i1, tii, 0.00001))  # 0.000001 for the case everything is zero
-    vertex.weight.scale <- i1 * max.frame.width/max
+    p.i1<-pmax(i1,0)
+    vertex.weight.scale <- p.i1 * max.frame.width/max
     v.col <- "darkgreen"
     vertex.weight.scale <- vertex.weight.scale + 0.0001 # to avoid zero values
     edge.weight.scale <- tii * max.frame.width/max

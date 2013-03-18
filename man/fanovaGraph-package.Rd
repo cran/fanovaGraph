@@ -19,10 +19,10 @@ Important functions:
        }
 }
 \author{
-J. Fruth, T. Muehlenstaedt, O. Roustant
+J. Fruth, T. Muehlenstaedt, O. Roustant, M. Jastrow
 }
 \references{
-Fruth, J.; Roustant, O.; Kuhnt, S. (2012+) Total interaction index: A variance-based sensitivity index for interaction screening.
+Fruth, J.; Roustant, O.; Kuhnt, S. (2013+) Total interaction index: A variance-based sensitivity index for second-order interaction screening.
 
 Janon, A.; Klein, T.; Lagnoux-Renaudie, A.; Nodet, M.; Prieur, C. (2012+) Asymptotic normality and efficiency of two Sobol index estimators.
 
