@@ -81,7 +81,7 @@ estimateGraph <- function(f.mat, d, q = NULL, q.arg = NULL,
   tii <- round(tii, 27)
   # estimate cliques
     E <- t(combn(d,2)[,tii[,1] > 0])
-    cliques <- maximal.cliques(graph(as.vector(t(E)), d + 1, FALSE))[-1]
+    cliques <- maximal.cliques(graph(as.vector(t(E)), d , FALSE))
     tii.scaled <- round(tii[,1,drop=FALSE] / V,27)
     res <- list(d=d, tii=tii, i1=i1, V = V, 
        tii.scaled = tii.scaled, cliques = cliques)

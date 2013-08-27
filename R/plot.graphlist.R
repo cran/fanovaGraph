@@ -1,9 +1,9 @@
 plot.graphlist <- function(x, names = NULL, i2 = NULL, layout = NULL, 
-                       plot.i1 = TRUE, max.thickness=20, circle.diameter=40, ...) {
+                        max.thickness=20, circle.diameter=40, ...) {
     oldPar <- par(no.readonly = TRUE)
       ## igraph changes settings at least for abline
     graphlist <- x
-    fanovaGraph:::modify.igraph()
+   
     d <- graphlist$d
     V <- graphlist$V
     i1 <- graphlist$i1[,1]
@@ -13,7 +13,7 @@ plot.graphlist <- function(x, names = NULL, i2 = NULL, layout = NULL,
     E <- t(combn(d,2))
     E <- E[active,]
     
-    g <- graph(as.vector(t(E)) - 1, n = d, directed = FALSE)
+    g <- graph(as.vector(t(E)) , n = d, directed = FALSE)
     if (is.null(layout)) {
         layout <- layout.fruchterman.reingold(g)
     }
@@ -26,26 +26,23 @@ plot.graphlist <- function(x, names = NULL, i2 = NULL, layout = NULL,
     V(g)$size <- circle.diameter
       ## vertex size (circle diameter)
   ###################################
-    if(plot.i1 == FALSE){
-      i1 <- rep(0,d)
-    }
+   
   ###################################
     ## scaling
-    max <- max(c(i1, tii, 0.00001))  # 0.000001 for the case everything is zero
-    p.i1<-pmax(i1,0)
-    vertex.weight.scale <- p.i1 * max.frame.width/max
-    v.col <- "darkgreen"
-    vertex.weight.scale <- vertex.weight.scale + 0.0001 # to avoid zero values
+    max <- max(c(tii,0.000001))  # 0.000001 for the case everything is zero
+   
+    
+    
+    
     edge.weight.scale <- tii * max.frame.width/max
     e.col <- "darkgreen"
     
-    if (plot.i1 == FALSE){
-      vertex.weight.scale = 4
-      v.col <- "black"
-    }
+  
+    v.col <- "black"
+    
     
     #### plotting
-    plot(g, layout = layout, vertex.shape = "circle2", vertex.frame.width = vertex.weight.scale,
+    plot(g, layout = layout, vertex.shape = "circle", 
         edge.width = edge.weight.scale, vertex.frame.color = v.col,
         vertex.color = "white", edge.color = e.col, vertex.label = names,
         vertex.label.color = "black")
@@ -57,7 +54,7 @@ plot.graphlist <- function(x, names = NULL, i2 = NULL, layout = NULL,
         }
         edge.weight.scale2 <- i2 * max.frame.width/max
         par(new = TRUE)
-        plot(g, layout = layout, vertex.shape = "circle2", vertex.frame.width = vertex.weight.scale,
+        plot(g, layout = layout, vertex.shape = "circle", 
             edge.width = edge.weight.scale2, vertex.frame.color = v.col,
             vertex.color = "white", edge.color = "lightgreen", vertex.label = names,
             vertex.label.color = "black")

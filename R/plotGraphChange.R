@@ -11,7 +11,7 @@ plotGraphChange <- function(graphlist, fix.layout = TRUE, delta.layout = 0.01) {
     #   delta.layout)
     tii.layout <- threshold(graphlist, delta = delta.layout, scaled = TRUE)$tii[,1]
     E.layout <- t(combn(d,2)[,tii.layout>0])
-    g.layout <- graph(as.vector(t(E.layout)) - 1, n = d, directed = FALSE)
+    g.layout <- graph(as.vector(t(E.layout)), n = d, directed = FALSE)
     layout <- layout.fruchterman.reingold(g.layout)
     
     devAskNewPage(ask = TRUE)

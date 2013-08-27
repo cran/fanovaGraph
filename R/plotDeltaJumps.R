@@ -15,8 +15,8 @@ plotDeltaJumps <- function(graphlist, interval = c(0,1), mean.clique.size = FALS
     s.CL <- c()
     for (i in 1:length(delta)) {
         E <- t(totalIntSortNorm[-3, which(totalIntSortNorm[3, ] > delta[i])])
-        E.graph <- graph(as.vector(t(E)), n = d + 1, directed = FALSE)
-        CL <- maximal.cliques(E.graph)[-1]
+        E.graph <- graph(as.vector(t(E)), n = d , directed = FALSE)
+        CL <- maximal.cliques(E.graph)
         n.CL[i] <- length(CL)
         s.CL[i] <- mean(sapply(CL, length))
     }

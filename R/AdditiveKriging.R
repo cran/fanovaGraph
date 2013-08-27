@@ -144,7 +144,7 @@ kmAdditive <- function(x, y, n.initial.tries = 50,
     if (n.cl == 1) {
         parameter <- km(~1, design = data.frame(x), response = y, covtype = covtype, 
             iso = iso)
-        message("full clique: used DiceKriging:::km, return object of class km")
+        message("full clique: used DiceKriging::km, return object of class km")
         return(parameter)
     } else {
         n.cl.ani <- n.cl - sum(iso)
@@ -209,7 +209,7 @@ predictAdditive <- function(newdata, x, y, parameter, covtype = "gauss", eps.R =
         iso <- rep(FALSE, n.cl)
     }
     if (n.cl == 1 & class(parameter) == "km") {
-        message("full clique: used DiceKriging:::predict.km")
+        message("full clique: used DiceKriging::predict.km")
         pred <- predict(parameter, newdata = newdata, type = "UK", 
                            se.compute=se.compute, checkNames = FALSE)
         if (se.compute)

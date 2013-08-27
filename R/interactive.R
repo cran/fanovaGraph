@@ -5,7 +5,7 @@ plotTk <- function(graphlist, delta.layout = 0.01) {
     totalInt <- graphlist$tii[,1]
     tii.layout <- threshold(graphlist, delta = delta.layout, scaled = TRUE)$tii[,1]
     E.layout <- t(combn(d,2)[,tii.layout>0])
-    g.layout <- graph(as.vector(t(E.layout)) - 1, n = d, directed = FALSE)
+    g.layout <- graph(as.vector(t(E.layout)), n = d, directed = FALSE)
     layout <- layout.fruchterman.reingold(g.layout)
     max.delta <- max(totalInt/dall + 0.001)
     
@@ -32,6 +32,8 @@ plotTk <- function(graphlist, delta.layout = 0.01) {
     tkpack(cutFrame, cutSlider, side = "bottom")
 }
 
+# necessary for checks:
+if(getRversion() >= "2.15.1")  globalVariables(c("delta", "manipulate", "slider")) 
 
 plotManipulate <- function(graphlist, delta.layout = 0.01) {
     require(manipulate)
@@ -40,7 +42,7 @@ plotManipulate <- function(graphlist, delta.layout = 0.01) {
     totalInt <- graphlist$tii[,1]
     tii.layout <- threshold(graphlist, delta = delta.layout, scaled = TRUE)$tii[,1]
     E.layout <- t(combn(d,2)[,tii.layout>0])
-    g.layout <- graph(as.vector(t(E.layout)) - 1, n = d, directed = FALSE)
+    g.layout <- graph(as.vector(t(E.layout)) , n = d, directed = FALSE)
     layout <- layout.fruchterman.reingold(g.layout)
     max.delta <- max(totalInt/dall + 0.001)
     

@@ -1,4 +1,8 @@
 CHANGELOG for fanovaGraph 
+version 1.4.3
+* migration from igraph0 to igraph
+* setting of vertex width not supported anymore
+
 version 1.4.2
 * in estimateGraph: full set estimation strategs implemented for method by Liu Owen and pick-and-freeze method (former Sobol method)
 * new function i2Index for the estimation of pure second-order Sobol indices

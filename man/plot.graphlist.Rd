@@ -2,12 +2,12 @@
 \alias{plot.graphlist}
 \alias{plot}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{Plot Graph via Package \code{\link[igraph0:igraph-package]{igraph0}}
+\title{Plot Graph via Package \code{\link[igraph:igraph-package]{igraph}}
 }
 \description{
-Plot FANOVA graphs using functions from package \code{\link[igraph0:igraph-package]{igraph0}}.}
+Plot FANOVA graphs using functions from package \code{\link[igraph:igraph-package]{igraph}}.}
 \usage{
-\method{plot}{graphlist}(x, names = NULL, i2 = NULL, layout = NULL, plot.i1 = TRUE, max.thickness=20, 
+\method{plot}{graphlist}(x, names = NULL, i2 = NULL, layout = NULL, max.thickness=20, 
 circle.diameter=40, ...)
 }
 \arguments{
@@ -17,9 +17,9 @@ circle.diameter=40, ...)
 }
     \item{i2}{optional vector of second order interaction indices (thickness of inner edges)
 }
-    \item{plot.i1}{optional boolean, if TRUE main effects are drawn in the graph by vertices thicknesses, should be set to FALSE when only total interaction indices are of interest
-}
-  \item{layout}{optional layout for the graph as in \code{\link[igraph0:igraph-package]{igraph0}},
+
+
+  \item{layout}{optional layout for the graph as in \code{\link[igraph:igraph-package]{igraph}},
   default is \code{layout.fruchterman.reingold}
 }
   \item{max.thickness}{optional value for the maximal line thickness, defaults to 20
@@ -45,7 +45,7 @@ op <- par(no.readonly=TRUE)
 g1 <- estimateGraph(f.mat=ishigami.fun, d=3, q.arg=list(min=-pi,max=pi), n.tot=10000)
 plot(g1)
 plot(g1, names=c("A","B","C"))
-plot(g1, names=c("A","B","C"), plot.i1 = FALSE)
+
 
 # include pure second order indices
 g2 <- estimateGraph(f.mat=function(x) x[,1]*x[,2]*x[,3]+x[,2]*x[,3], d=3, 

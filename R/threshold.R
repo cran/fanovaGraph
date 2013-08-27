@@ -17,6 +17,6 @@ threshold <- function(graphlist, delta, scaled = TRUE, robust = FALSE) {
   graphlistNew$tii.scaled[which(valuesToCut <= delta),] <- 0
   # estimate cliques
     E <- t(combn(d,2)[,graphlistNew$tii[,1] > 0])
-    graphlistNew$cliques <- maximal.cliques(graph(as.vector(t(E)), d + 1, FALSE))[-1]
+    graphlistNew$cliques <- maximal.cliques(graph(as.vector(t(E)), d, FALSE))
   return(graphlistNew)
 } 

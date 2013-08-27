@@ -5,7 +5,7 @@ simAdditive <- function(newdata, mu, parameter, covtype, cl, iso=FALSE, eps.R = 
   ncl <- length(cl)
   if (length(iso)==1) 
     iso <- rep(iso,ncl)
-  parameter <- fanovaGraph:::paramList2Vect(parameter, cl, iso)
+  parameter <- paramList2Vect(parameter, cl, iso)
   alpha <- parameter[1:ncl]
   theta <- parameter[-(1:ncl)]
   thetalist <- cl
@@ -26,10 +26,10 @@ simAdditive <- function(newdata, mu, parameter, covtype, cl, iso=FALSE, eps.R = 
   }
   #building R
   for (j in 1:ncl) { 
-    cor.str <- DiceKriging:::covStruct.create(covtype = covtype, d = length(cl[[j]]), 
+    cor.str <- DiceKriging::covStruct.create(covtype = covtype, d = length(cl[[j]]), 
             var.names = NULL, known.covparam = "All", coef.cov = thetalist[[j]], 
             coef.var = alpha[j], iso = iso[j])
-    R <- R + DiceKriging:::covMatrix(object = cor.str, X = as.matrix(newdata[, cl[[j]]]))[[1]]
+    R <- R + DiceKriging::covMatrix(object = cor.str, X = as.matrix(newdata[, cl[[j]]]))[[1]]
   }
   R <- R + diag(eps.R, n, n)
   whitenoise <- rnorm(n)
