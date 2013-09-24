@@ -1,4 +1,7 @@
 CHANGELOG for fanovaGraph 
+version 1.4.4
+* setting of vertex width supported again
+
 version 1.4.3
 * migration from igraph0 to igraph
 * setting of vertex width not supported anymore

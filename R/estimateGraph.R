@@ -38,7 +38,8 @@ estimateGraph <- function(f.mat, d, q = NULL, q.arg = NULL,
       tii <- estimateGraphRBD(f.mat, d, q, q.arg, L, M, print.loop.index, ...)
   }
   
-  if (method == "PickFreeze") {
+  
+   if (method == "PickFreeze") {
       if (!is.null(n.pf) & !is.null(n.tot)) {
           warning("n.pf will be omitted since n.tot is specified")
           n.pf <- round(n.tot/(d + 1), 0)

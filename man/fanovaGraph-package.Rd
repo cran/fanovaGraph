@@ -38,7 +38,7 @@ Sobol', I. M. (1993) Sensitivity estimates for nonlinear mathematical models, \e
 \seealso{
 \code{\link[DiceKriging:DiceKriging-package]{DiceKriging}}, 
 \code{\link[sensitivity:sensitivity-package]{sensitivity}},
-\code{\link[igraph0:igraph-package]{igraph}}
+\code{\link[igraph:igraph-package]{igraph}}
 }
 \examples{
 #demo(ExampleIshigami)

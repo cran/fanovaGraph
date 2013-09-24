@@ -1,8 +1,8 @@
-0585363c75eec88c119428ab95d2114d *CHANGELOG
-00cc32c6e28152cd92a68316aa1a189f *DESCRIPTION
+9bba0175b69375cf1df16e30301fad87 *CHANGELOG
+adbe52ff3b2f81dd63411a892df2cfdc *DESCRIPTION
 77331683192de0dd40c78f405479b936 *NAMESPACE
 8e09a48a8be9123cd494aa88df0b521b *R/AdditiveKriging.R
-9704d8092aad77283369f4125689fbc5 *R/estimateGraph.R
+dee8ce99c227b8b91eace777ef5d768a *R/estimateGraph.R
 67b573def0cf1470548cfde384088074 *R/estimateGraphFixFast.R
 fb0d00a3ec4d207a6a38574015fbd457 *R/estimateGraphLiuOwen.R
 853ef7787facf2a1304e5faadca31873 *R/estimateGraphPickFreeze.R
@@ -10,7 +10,7 @@ b2da28fdea48e741248b15cb2c9af254 *R/estimateGraphRBD.R
 ce975a933938b21d2cb666a0ce9a8ce8 *R/i2Index.R
 d9166faf3b4bc58c7beff6b08f7e2400 *R/interactive.R
 367af5b54ffda54777877c23bb303b06 *R/kmPredictWrapper.R
-811f3572fcfde61acfb2557f18e7866b *R/plot.graphlist.R
+511084ae42df8b2ac7784d4cff6440d7 *R/plot.graphlist.R
 3e2804e69b4b6728d58720fc5da3bd8f *R/plotDeltaJumps.R
 da112ac2c402849c716ea5cf2eb91d68 *R/plotGraphChange.R
 2b59dabfbe6bc8c2dd648c11185677b9 *R/print.graphlist.R
@@ -27,11 +27,11 @@ c3f58143e6529ee7030b5e2037d5f3be *inst/tests/test_fullexample.R
 c713f77fb97ec630ceb02bf66762ebd3 *inst/tests/tests.R
 07364d69c269e2b42c546356c56656b9 *man/L.Rd
 95e5193a1f2e0bc0dcaba76ea6c8cfef *man/estimateGraph.Rd
-27460b522c5e029c93e5f28fb89b6726 *man/fanovaGraph-package.Rd
+1aa73110841b39c3ec382350ace67dcb *man/fanovaGraph-package.Rd
 abe665ac6796ef153bce5322aba04b87 *man/i2Index.Rd
 4fade47bc4070c8875dbf2a99703d91f *man/kmAdditive.Rd
 8d0e67acb6e0e89e3090aa134f889186 *man/kmPredictWrapper.Rd
-8ef853ef76dfc31d95ded632845dbbbc *man/plot.graphlist.Rd
+de2d2a066a779fefef2a62e06a142413 *man/plot.graphlist.Rd
 74bdb0a1dc6b10f5d7808ce9731c8bb2 *man/plotDeltaJumps.Rd
 80e260fe1b75b4d30129acff8d1bd2fd *man/plotGraphChange.Rd
 efb3a8ba371c3313edea6c7c4b6c921d *man/predictAdditive.Rd
