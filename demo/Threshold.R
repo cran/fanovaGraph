@@ -1,21 +1,29 @@
 #################################################################
-# Several graphs to support threshold decision
+# Several methods to support threshold decision
 #################################################################
 
 require(fanovaGraph)
 
-### example fanovaGraph
+### example data set with two interactions
+d = 4
+x <- matrix(runif(40*d), 40, d)
+y <- (x[,1]-0.5) * (x[,2]-0.5) + 0.9*(x[,1]-0.5) * (x[,3]-0.5) 
 
-fun <- function(x) {x[,1]*x[,2]*x[,3] + x[,4]*x[,5]*x[,6] + 
-  0.7*x[,1]*x[,2]*x[,3]*x[,4]*x[,5]*x[,6]}
+### kriging prediction model
+KM <- km(~1, design = data.frame(x), response = y)
 
-g <- estimateGraph(fun, d=6, q.arg=list(min=-1,max=1), n.tot=20000, method="LiuOwen")
+### graph estimation
+g <- estimateGraph(kmPredictWrapper, d=d, n.tot = 10000, km.object=KM)
 
-### plots for threshold decision:
+##################################################################
+### Threshold decision
 
 ### examine full graph
 
-plot(g)
+plot(g, plot.i1 = FALSE)
+
+### Compare candidate thresholds on prediction performance
+comparison <- thresholdIdentification(g, x, y, n.cand = 2)
 
 ### Delta Jump Plot
 plotDeltaJumps(g)
@@ -30,4 +38,9 @@ plotTk(g)
 
 ### the same with library manipulate
 plotManipulate(g)
+
+### 'unknown' true threshold
+g.cut <- threshold(g, delta = 0.2, scale = TRUE)
+plot(g.cut)
+
 

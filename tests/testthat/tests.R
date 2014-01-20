@@ -69,3 +69,25 @@ test_that("overall variance and standard sobol indices work",{
   expect_equivalent(107.8001667819, g.norm$V)          
   expect_equivalent(6.817385649107, g.norm$i1[2,1])   
 })
+
+test_that("thresholdIdentification works", {
+  d <- 6; domain <- c(-1, 1)
+  
+  fun <- function(x) {
+    beta <- c(-0.8, -1.1, 1.1, 1)
+    gamma <- c(-0.5, 0.9, 1, -1.1)
+    result <- cos(cbind(1, x[, c(1, 5, 3)]) %*% beta) +
+      sin(cbind(1, x[, c(4, 2, 6)]) %*% gamma)
+    return(result)
+  }
+  
+  data(L)
+  x <- L
+  y <- fun(x)
+  KM <- km(~1, design = data.frame(x), response = y, covtype = "matern5_2")
+  g <- estimateGraph(f.mat = kmPredictWrapper, d = d, n.tot = 30000, q.arg = 
+                       list(min = domain[1], max = domain[2]), km.object = KM) 
+  t<-thresholdIdentification(g, x, y, n.delta = 3)
+  expect_equivalent(c(1.6261704, 0.3663066, 4.1979544, 3.0712778), t$RMSE)
+  
+})

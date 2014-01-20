@@ -209,7 +209,7 @@ predictAdditive <- function(newdata, x, y, parameter, covtype = "gauss", eps.R =
         iso <- rep(FALSE, n.cl)
     }
     if (n.cl == 1 & class(parameter) == "km") {
-        message("full clique: used DiceKriging::predict.km")
+        message("full clique: used DiceKriging::predict.km") 
         pred <- predict(parameter, newdata = newdata, type = "UK", 
                            se.compute=se.compute, checkNames = FALSE)
         if (se.compute)
@@ -234,7 +234,7 @@ predictAdditive <- function(newdata, x, y, parameter, covtype = "gauss", eps.R =
         factor2 <- Rinvs %*% (y - DM %*% beta)
          yhat <- numeric(length(newdata[, 1]))
         r.newdata <- rfunc(newdata, x, theta, alpha, covtype, n.cl, cl, iso)
-	      yhat <- as.numeric(beta) + t(r.newdata)%*%factor2
+          yhat <- as.numeric(beta) + t(r.newdata)%*%factor2
     if (se.compute) {
       sigma2 <- (1/(n - p)) * t((y - DM %*% beta)) %*% 
             Rinvs %*% (y - DM %*% beta)

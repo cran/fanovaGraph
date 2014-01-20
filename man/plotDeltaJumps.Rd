@@ -32,7 +32,7 @@ J. Fruth, O. Roustant
 }
 
 \seealso{
-\code{\link{plotGraphChange}}
+\code{\link{thresholdIdentification}}, \code{\link{plotGraphChange}}
 }
 \examples{
 tii <- matrix(c(0.0018, 0.0265, 0.0017, 0.0277, 0.0018, 0.001, 0.028, 0.0013, 

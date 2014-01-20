@@ -13,7 +13,7 @@ covtype = "gauss", eps.Var = 1e-06, max.it = 1000, iso = FALSE)
 \arguments{
   \item{x}{a design matrix of input variables, number of columns should be number of variables
 }
-  \item{y}{a vector of output variables of the same length as the columns of L
+  \item{y}{a vector of output variables of the same length as the columns of \code{x}
 }
   \item{n.initial.tries}{number of random initial parameters for optimization, defaults to 50
 }

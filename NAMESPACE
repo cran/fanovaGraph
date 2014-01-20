@@ -10,8 +10,13 @@ plotManipulate,
 plotTk,
 simAdditive,
 threshold,
+thresholdIdentification,       
 totalIndex,
 predictAdditive)
+
+import(DiceKriging)
+import(igraph)
+import(sensitivity)
 
 ## (internal comment:)
 ## not exported: modify.graph, LogLConstrained, Rfunc, rfunc, paramVect2List, paramList2Vect, estimateGraphLiuOwen, estimateGraphFixFast, estimateGraphPickFreeze, estimateGraphRBD, mainEffectInices

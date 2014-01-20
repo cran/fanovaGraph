@@ -1,4 +1,9 @@
 CHANGELOG for fanovaGraph 
+
+version 1.4.5
+* new function thresholdIdentification
+* improved vertex width scaling
+
 version 1.4.4
 * setting of vertex width supported again
 
