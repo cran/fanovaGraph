@@ -1,5 +1,8 @@
 CHANGELOG for fanovaGraph 
 
+version 1.4.6
+* fixing testthat compatibility
+
 version 1.4.5
 * new function thresholdIdentification
 * improved vertex width scaling

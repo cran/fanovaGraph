@@ -1,4 +1,4 @@
 library(testthat)
 library(fanovaGraph)
 
-test_package("fanovaGraph")
+test_check("fanovaGraph")

@@ -75,7 +75,7 @@ expect_equivalent(c(0.001869581276145, 0.043586803962427), totalInt$tii[1:2,1])
 graph <- threshold(totalInt, delta = 0.01)
 
 cl <- graph$cliques
-expect_equal(list(c(6,2,4),c(1,3,5)),cl)
+expect_equal(list(c(1,3,5),c(2,4,6)),cl)
 
 
 ##############################

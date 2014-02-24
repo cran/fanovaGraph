@@ -1,8 +1,8 @@
 Package: fanovaGraph
 Type: Package
 Title: Building Kriging models from FANOVA graphs
-Version: 1.4.5
-Date: 2014-01-20
+Version: 1.4.6
+Date: 2014-02-24
 Author: Jana Fruth, Thomas Muehlenstaedt, Olivier Roustant, Malte Jastrow
 Maintainer: Jana Fruth <fruth@statistik.tu-dortmund.de>
 Description: Estimation and plotting of a function's FANOVA graph to identify the interaction structure and fitting, prediction and simulation of a kriging model modified by the identified structure.
@@ -10,7 +10,7 @@ License: GPL-3
 LazyLoad: yes
 Depends: sensitivity, igraph, DiceKriging (>= 1.4)
 Suggests: tcltk, manipulate, testthat
-Packaged: 2014-01-23 09:16:35 UTC; fruth
+Packaged: 2014-02-27 14:35:34 UTC; malte
 NeedsCompilation: no
 Repository: CRAN
-Date/Publication: 2014-01-23 10:42:55
+Date/Publication: 2014-02-27 16:13:46

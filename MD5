@@ -1,5 +1,5 @@
-72c89fcfec410a2df89a5b86188eced9 *CHANGELOG
-31320edd54d750df5873effbff0d1236 *DESCRIPTION
+6c91adcb52352a3928243e3082e290c2 *CHANGELOG
+c2cc3390d56d3df89bbde4d0eae8a10a *DESCRIPTION
 ab9a6d1fc024f074bd01d60df6c8bd74 *NAMESPACE
 98e2bdb424471c4f99ee13f79a72122d *R/AdditiveKriging.R
 dee8ce99c227b8b91eace777ef5d768a *R/estimateGraph.R
@@ -38,6 +38,6 @@ efb3a8ba371c3313edea6c7c4b6c921d *man/predictAdditive.Rd
 676e304bc0ce1a0bc46e1cabceb125f8 *man/threshold.Rd
 1944bde076edce3f40016930e8a2bddf *man/thresholdIdentification.Rd
 e05d19d0d72e6631f50817dec4b32e17 *man/totalIndex.Rd
-49a565553134e058fc4b9e4df2ebe4cd *tests/run-all.R
-c3f58143e6529ee7030b5e2037d5f3be *tests/testthat/test_fullexample.R
-590d14f7782906f96b689b7106b87f29 *tests/testthat/tests.R
+448c726e710e79f3ef24a8c7bc2bf084 *tests/run-all.R
+aad5da331318472449cbb66ec1d3f1d9 *tests/testthat/test_fullexample.R
+0c57cce84dd2fcb5f3031fff54f1dc8d *tests/testthat/tests.R
