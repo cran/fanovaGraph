@@ -1,4 +1,8 @@
-CHANGELOG for fanovaGraph 
+CHANGELOG for fanovaGraph
+
+version 1.4.7
+* adding information on a non-standard dependency in the DESCRIPTION file
+* fixing minor issue in pick-and-freeze method for estimate Graph
 
 version 1.4.6
 * fixing testthat compatibility

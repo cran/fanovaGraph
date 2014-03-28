@@ -1,11 +1,11 @@
-6c91adcb52352a3928243e3082e290c2 *CHANGELOG
-c2cc3390d56d3df89bbde4d0eae8a10a *DESCRIPTION
+520d86e892b233d424e9fba496793433 *CHANGELOG
+c5e0de0382df97b2b3f91fc049649764 *DESCRIPTION
 ab9a6d1fc024f074bd01d60df6c8bd74 *NAMESPACE
 98e2bdb424471c4f99ee13f79a72122d *R/AdditiveKriging.R
 dee8ce99c227b8b91eace777ef5d768a *R/estimateGraph.R
 67b573def0cf1470548cfde384088074 *R/estimateGraphFixFast.R
 fb0d00a3ec4d207a6a38574015fbd457 *R/estimateGraphLiuOwen.R
-853ef7787facf2a1304e5faadca31873 *R/estimateGraphPickFreeze.R
+a7937e89e55458fa74c9c692844e4d59 *R/estimateGraphPickFreeze.R
 b2da28fdea48e741248b15cb2c9af254 *R/estimateGraphRBD.R
 ce975a933938b21d2cb666a0ce9a8ce8 *R/i2Index.R
 d9166faf3b4bc58c7beff6b08f7e2400 *R/interactive.R
