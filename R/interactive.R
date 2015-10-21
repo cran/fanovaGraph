@@ -1,5 +1,5 @@
 plotTk <- function(graphlist, delta.layout = 0.01) {
-    require(tcltk)
+    # requireNamespace(tcltk) # included in namespace
     d <- graphlist$d
     dall <- graphlist$V
     totalInt <- graphlist$tii[,1]
@@ -36,7 +36,7 @@ plotTk <- function(graphlist, delta.layout = 0.01) {
 if(getRversion() >= "2.15.1")  globalVariables(c("delta", "manipulate", "slider")) 
 
 plotManipulate <- function(graphlist, delta.layout = 0.01) {
-    require(manipulate)
+    requireNamespace(manipulate)
     d <- graphlist$d
     dall <- graphlist$V
     totalInt <- graphlist$tii[,1]

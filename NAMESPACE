@@ -4,8 +4,6 @@ kmPredictWrapper,
 kmAdditive,
 plotDeltaJumps,
 plotGraphChange,
-plot.graphlist,
-print.graphlist,
 plotManipulate,
 plotTk,
 simAdditive,
@@ -14,9 +12,20 @@ thresholdIdentification,
 totalIndex,
 predictAdditive)
 
+S3method(plot, graphlist)
+S3method(print, graphlist)
+
 import(DiceKriging)
 import(igraph)
 import(sensitivity)
+
+importFrom("grDevices", "devAskNewPage", "rgb")
+importFrom("graphics", "abline", "axis", "legend", "lines", "par",
+           "points", "polygon", "rect", "symbols", "text", "title")
+importFrom("stats", "constrOptim", "qnorm", "rnorm", "runif", "var")
+importFrom("utils", "combn")
+importFrom("tcltk", "tclVar", "tclvalue", "tktoplevel", "tkwm.title", "tkframe", "tkscale", "tkpack", "tklabel")
+
 
 ## (internal comment:)
 ## not exported: modify.graph, LogLConstrained, Rfunc, rfunc, paramVect2List, paramList2Vect, estimateGraphLiuOwen, estimateGraphFixFast, estimateGraphPickFreeze, estimateGraphRBD, mainEffectInices

@@ -1,5 +1,9 @@
 CHANGELOG for fanovaGraph
 
+version 1.4.8
+* adaption to igraph update
+* importing non-base functions in NAMESPACE
+
 version 1.4.7
 * adding information on a non-standard dependency in the DESCRIPTION file
 * fixing minor issue in pick-and-freeze method for estimate Graph

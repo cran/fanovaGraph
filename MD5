@@ -1,6 +1,6 @@
-520d86e892b233d424e9fba496793433 *CHANGELOG
-c5e0de0382df97b2b3f91fc049649764 *DESCRIPTION
-ab9a6d1fc024f074bd01d60df6c8bd74 *NAMESPACE
+66c15f4d4e1849ee1d5f4f40a08399ca *CHANGELOG
+672f8e01fe4be4ba11707953d911ed4d *DESCRIPTION
+3ef18c4ae59bf3ebdc6ebf71e45e5cc0 *NAMESPACE
 98e2bdb424471c4f99ee13f79a72122d *R/AdditiveKriging.R
 dee8ce99c227b8b91eace777ef5d768a *R/estimateGraph.R
 67b573def0cf1470548cfde384088074 *R/estimateGraphFixFast.R
@@ -8,7 +8,7 @@ fb0d00a3ec4d207a6a38574015fbd457 *R/estimateGraphLiuOwen.R
 a7937e89e55458fa74c9c692844e4d59 *R/estimateGraphPickFreeze.R
 b2da28fdea48e741248b15cb2c9af254 *R/estimateGraphRBD.R
 ce975a933938b21d2cb666a0ce9a8ce8 *R/i2Index.R
-d9166faf3b4bc58c7beff6b08f7e2400 *R/interactive.R
+57c03805fdfb2c422d52a670f6f8d8c9 *R/interactive.R
 367af5b54ffda54777877c23bb303b06 *R/kmPredictWrapper.R
 724743c637dfcf9067b8d5009d573921 *R/plot.graphlist.R
 3e2804e69b4b6728d58720fc5da3bd8f *R/plotDeltaJumps.R
@@ -39,5 +39,5 @@ efb3a8ba371c3313edea6c7c4b6c921d *man/predictAdditive.Rd
 1944bde076edce3f40016930e8a2bddf *man/thresholdIdentification.Rd
 e05d19d0d72e6631f50817dec4b32e17 *man/totalIndex.Rd
 448c726e710e79f3ef24a8c7bc2bf084 *tests/run-all.R
-aad5da331318472449cbb66ec1d3f1d9 *tests/testthat/test_fullexample.R
+5f135a296d50b24d0468c93ce1c1e3ee *tests/testthat/test_fullexample.R
 0c57cce84dd2fcb5f3031fff54f1dc8d *tests/testthat/tests.R
