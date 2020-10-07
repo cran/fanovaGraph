@@ -1,5 +1,6 @@
 test_that("estimateGraph works for different n.tot and d for all methods",{
-  set.seed(1)
+  RNGversion("1.9")
+    set.seed(1)
   expect_equivalent(c(0, 1.02621411114, 0), 
       estimateGraph(f.mat=ishigami.fun, d=3, q.arg=list(min=-pi,max=pi), 
                              n.tot=100, method="LiuOwen")$tii[,1])
